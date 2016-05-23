@@ -85,5 +85,9 @@
   <% } %>
   <script src="http://localhost:6001/hoodie/client.js"></script>
 
+  <% if (TARGET_DESKTOP && ENV !== 'prod') { %>
+  <script>require('electron-connect').client.create()</script> 
+  <% } %>
+
 </body>
 </html>
