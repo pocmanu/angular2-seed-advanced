@@ -60,6 +60,7 @@ export class SeedConfig {
     { src: 'reflect-metadata/Reflect.js', inject: 'shims' },
     { src: 'es6-shim/es6-shim.js', inject: 'shims' },
     { src: 'systemjs/dist/system.src.js', inject: 'shims', env: ENVIRONMENTS.DEVELOPMENT },
+    { src: 'rxjs/bundles/Rx.js', inject: 'libs', env: ENVIRONMENTS.DEVELOPMENT },
     { src: 'rxjs/bundles/Rx.js', inject: 'libs', env: ENVIRONMENTS.DEVELOPMENT }
   ];
 

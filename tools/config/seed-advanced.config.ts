@@ -55,7 +55,8 @@ export class SeedAdvancedConfig extends SeedConfig {
       this.SYSTEM_CONFIG.paths['reflect-metadata'] = `${this.APP_BASE}node_modules/reflect-metadata/Reflect`;
     } else {
       this.SYSTEM_CONFIG['map'] = {
-        '@ngrx/store': `${this.APP_BASE}node_modules/@ngrx/store/index`
+        '@ngrx/store': `${this.APP_BASE}node_modules/@ngrx/store/index`,
+        'angular2-grid': `${this.APP_BASE}node_modules/angular2-grid/dist/NgGrid`
       };
     }
 
@@ -74,5 +75,6 @@ export class SeedAdvancedConfig extends SeedConfig {
     this.SYSTEM_BUILDER_CONFIG.paths['lodash'] = `node_modules/lodash/index.js`;
     this.SYSTEM_BUILDER_CONFIG.paths['ngrx-store-router'] = `node_modules/ngrx-store-router/index.js`;
     this.SYSTEM_BUILDER_CONFIG.paths['@ngrx/store'] = `node_modules/@ngrx/store/index.js`;
+    this.SYSTEM_BUILDER_CONFIG.paths['angular2-grid'] = `node_modules/angular2-grid/dist/NgGrid.js`;
   }
 }

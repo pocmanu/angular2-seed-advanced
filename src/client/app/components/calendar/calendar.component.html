@@ -1,0 +1,9 @@
+<div [ngGrid]="_eventTableConfig">
+    <div *ngFor="let box of _titles" [(ngGridItem)]="box.config" (click)="onClick(box)">
+        <div class="title">{{box.title}}</div>
+        <p>{{box.text}}</p>
+    </div>
+    <div *ngFor="let event of _events" [ngGridItem]="getConfig(event)" (ngGridItem)="updateEvent($event)">
+        <div class="title">{{event.title}}</div>
+    </div>
+</div>

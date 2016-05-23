@@ -11,6 +11,7 @@ import {NavbarComponent} from './navbar.component';
 import {ToolbarComponent} from './toolbar.component';
 import {HomeComponent} from '../home/home.component';
 import {AboutComponent} from '../about/about.component';
+import {CalendarComponent} from '../calendar/calendar.component';
 
 @RouteComponent({
   selector: 'sd-app',
@@ -29,6 +30,11 @@ import {AboutComponent} from '../about/about.component';
     path: '/about',
     component: AboutComponent,
     name: 'About'
+  },
+  {
+    path: '/calendar',
+    component: CalendarComponent,
+    name: 'Calendar'
   }
 ])
 export class AppComponent {
