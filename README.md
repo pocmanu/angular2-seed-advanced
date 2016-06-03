@@ -10,7 +10,7 @@
 
 #### Considering [Angular 2](https://angular.io/) for a large project? Do you need potential i18n support? Enhanced testing support? Oh and building for multiple platforms too? Web, *native* Mobile (Android/iOS), and even Desktop (Mac, Windows and Linux)?  
 
-This is an **advanced** seed project for Angular 2 apps based on [Minko Gechev's](https://github.com/mgechev) [angular2-seed](https://github.com/mgechev/angular2-seed) that expands on all of it's great features to include core support for:
+This is an **advanced** seed project for Angular 2 apps based on [Minko Gechev's](https://github.com/mgechev) [angular2-seed](https://github.com/mgechev/angular2-seed) that expands on all of its great features to include core support for:
 
 #### Integration with:
 - [ngrx/store](https://github.com/ngrx/store) RxJS powered state management, inspired by **Redux**
@@ -234,22 +234,23 @@ Several branches exist with certain features integrated:
 #### Setup
 
 1. Download a zip of the seed. (**Do not fork**)
-2. `npm run setup` - This will initialize `git` as well as setup `upstream` properly.
+2. `npm run git.setup` - This will initialize `git` as well as setup `upstream` properly.
 3. `git remote add origin ...your private repo...`
-4. `git add .; git commit -m'setup'` - To setup the first commit
-5. `npm run merge` - This will fetch upstream and run the first merge (*Important)
-  * IMPORTANT: You will see a wall of Conflicts after doing above. This is normal. There actually will not be any conflicts as it's just reporting every single file which both sides (`upstream` and your first commit) added.
+4. `npm run git.prepare` - This will prepare git to handle the merge
+5. `npm run git.merge` - This will fetch upstream and run the first merge (*Important)
+  * IMPORTANT: You will see a wall of Conflicts after doing above (a Conflict for every single file). This is normal. There actually will not be any problematic conflicts as it's just reporting every single file which both sides (`upstream` and your first commit) added.
 6. `git add .; git commit -m'ready'`. Yes, you will be committing all those conflicts, which actually are not a problem in this 1 time case.
 7. Now you have `git` setup and ready to develop your application as well as merge in upstream changes in the future.
-8. Create a new `framework` for your application in `src/client/app/frameworks` to build your codebase out. Say your app is called `AwesomeApp`, then create `awesomeapp.framework` and start building out all your components and services in there. Create other frameworks as you see fit to organize.
-9. If you don't want an integration that comes out of box with this seed; for example. let's say you don't want to use i18n. Then just delete the `i18n.framework`, remove `ng2-translate` as dependency root `package.json` and `nativescript/package.json`. Then remove any references to `i18n` throughout.
+8. `npm install` (and all other usage docs in this `README` apply)
+9. Create a new `framework` for your application in `src/client/app/frameworks` to build your codebase out. Say your app is called `AwesomeApp`, then create `awesomeapp.framework` and start building out all your components and services in there. Create other frameworks as you see fit to organize.
+10. If you don't want an integration that comes out of box with this seed; for example. let's say you don't want to use i18n. Then just delete the `i18n.framework`, remove `ng2-translate` as dependency root `package.json` and `nativescript/package.json`. Then remove any references to `i18n` throughout.
 
 You can read more about [configuring a remote for a fork here](https://help.github.com/articles/configuring-a-remote-for-a-fork/)
 
 #### Merging latest upstream changes
 
-1. `npm run merge.preview` - This will fetch `upstream` and show you how the merge would look
-2. `npm run merge` - This will actually do the merge
+1. `npm run git.merge.preview` - This will fetch `upstream` and show you how the merge would look
+2. `npm run git.merge` - This will actually do the merge
 3. Handle any conflicts to get latest upstream into your application.
 4. Continue building your app.
 
