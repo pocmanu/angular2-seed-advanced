@@ -1,0 +1,16 @@
+<div>
+      <h2>Todos</h2>
+      <new-todo-input (create)="addTodo($event)"></new-todo-input>
+      =========
+      <todo-list
+        [todos]="todos | async"
+        (complete)="completeTodo($event)"
+        (delete)="deleteTodo($event)"
+      ></todo-list>
+      =========
+      <div>
+        <button (click)="show('ALL')">All</button>
+        <button (click)="show('PENDING')">Pending</button>
+        <button (click)="show('COMPLETE')">Complete</button>
+      </div>
+</div>

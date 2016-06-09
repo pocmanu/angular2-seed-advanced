@@ -12,6 +12,8 @@ import {ToolbarComponent} from './toolbar.component';
 import {HomeComponent} from '../home/home.component';
 import {AboutComponent} from '../about/about.component';
 import {CalendarComponent} from '../calendar/calendar.component';
+import {TodosComponent} from '../todo/todos.component';
+import {CounterComponent} from '../counter/counter.component';
 
 @RouteComponent({
   selector: 'sd-app',
@@ -35,6 +37,16 @@ import {CalendarComponent} from '../calendar/calendar.component';
     path: '/calendar',
     component: CalendarComponent,
     name: 'Calendar'
+  },
+  {
+    path: '/todos',
+    component: TodosComponent,
+    name: 'Todos'
+  },
+  {
+    path: '/counter',
+    component: CounterComponent,
+    name: 'Counter'
   }
 ])
 export class AppComponent {
