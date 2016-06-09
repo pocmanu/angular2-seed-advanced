@@ -124,7 +124,15 @@ gulp.task('desktop', (done: any) =>
               'desktop.build',
               done));
 
-// Package
+// Release and Package
+
+// TODO: integrate prod build into electron package
+// gulp.task('desktop.prod', (done: any) =>
+//   runSequence('build.prod',
+//               'desktop.libs',
+//               'desktop.build',
+//               done));
+
 gulp.task('desktop.mac', (done: any) =>
   runSequence('desktop',
               'desktop.package.mac',
