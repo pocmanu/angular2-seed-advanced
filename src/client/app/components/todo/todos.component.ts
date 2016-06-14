@@ -1,49 +1,70 @@
-import { Component, ChangeDetectionStrategy } from '@angular/core';
+import {Component, ChangeDetectionStrategy} from '@angular/core';
+import {TodoList} from "./todo-list.component";
+import {TodoInput} from "./todo-input.component";
+import {FilterSelect} from "./filter-select.component";
 import {Store} from '@ngrx/store';
-import { Observable } from 'rxjs/Observable';
-import 'rxjs/add/operator/combineLatest';
-//import {LogMonitor} from '@ngrx/devtools'
-
-import { TodoActions } from '../../frameworks/app.framework/index';
-
-import {NewTodoInput} from './newTodo.component';
-import {TodoList} from './todolist.component'
+import {AppState, Todo, TodoModel} from "../../frameworks/app.framework/services/todos/todo.model";
+import {Observable} from "rxjs/Observable";
+import {ADD_TODO, REMOVE_TODO, TOGGLE_TODO, } from "../../frameworks/app.framework/services/todos/todos.actions";
+import {UNDO, REDO} from "../../frameworks/app.framework/services/undoable/undoable.actions";
+import 'rxjs/add/observable/combineLatest';
 
 @Component({
-    moduleId: module.id,
-    selector: 'todos',
-    templateUrl: 'todos.component.html',
-    directives: [/*LogMonitor,*/ NewTodoInput, TodoList],
-    changeDetection: ChangeDetectionStrategy.OnPush
+	selector: `todos`,
+	templateUrl: `./app/components/todo/todos.component.html`,
+	styleUrls: [`./app/components/todo/todos.css`],
+    directives: [TodoList, TodoInput, FilterSelect],
+	changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TodosComponent {
-  todos:Observable<any>;
-  constructor(private store:Store<any>, private todoActions: TodoActions) {
-    console.log(store.select('todos'));
-    this.todos = store.select('todos')
-      .combineLatest(store.select('visibilityFilter'), (todos, visibilityFilter) => {
-        console.log(todos.entities)
-        return todos.entities.filter(visibilityFilter)
-      });
-  }
-  addTodo(newTodo){
-    this.store.dispatch(this.todoActions.add(newTodo));
-  }
-/*  completeTodo(todo){
-    this.store.dispatch({
-      type: TodoActions.COMPLETE_TODO,
-      payload: todo
-    });
-  }
-  deleteTodo(todo){
-    this.store.dispatch({
-      type: TodoActions.DELETE_TODO,
-      payload: todo
-    });
-  }
-  show(filter){
-    this.store.dispatch({
-      type: TodoActions[filter]
-    });
-  }*/
+	public todosModel$: Observable<TodoModel>;
+	private id: number = 0;
+
+	constructor(private _store: Store<AppState>) {
+		const todos$ = _store.select<Observable<Todo[]>>('todos');
+		const visibilityFilter$ = _store.select('visibilityFilter');
+
+		this.todosModel$ = Observable
+			.combineLatest(
+			todos$,
+			visibilityFilter$,
+			({present = []}, visibilityFilter: any) => {
+				return {
+					filteredTodos: present.filter(visibilityFilter),
+					totalTodos: present.length,
+					completedTodos: present.filter((todo: Todo) => todo.complete).length
+				}
+			}
+		);
+	}
+
+	addTodo(description: string) {
+		this._store.dispatch({
+			type: ADD_TODO, payload: {
+				id: ++this.id,
+				description,
+				complete: false
+			}
+		});
+	}
+
+	removeTodo(id: number) {
+		this._store.dispatch({ type: REMOVE_TODO, payload: id });
+	}
+
+	toggleTodo(id: number) {
+		this._store.dispatch({ type: TOGGLE_TODO, payload: id });
+	}
+
+	updateFilter(filter: any) {
+		this._store.dispatch({ type: filter });
+	}
+
+	undo() {
+		this._store.dispatch({ type: UNDO });
+	}
+
+	redo() {
+		this._store.dispatch({ type: REDO });
+	}
 }

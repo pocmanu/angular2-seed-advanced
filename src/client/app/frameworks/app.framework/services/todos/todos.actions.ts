@@ -1,46 +1,9 @@
-import { Injectable } from '@angular/core';
-import { Action } from '@ngrx/store';
+//todo actions
+export const ADD_TODO = 'ADD_TODO';
+export const REMOVE_TODO = 'REMOVE_TODO';
+export const TOGGLE_TODO = 'TOGGLE_TODO';
 
-@Injectable()
-export class TodoActions {
-
-  static ADD = '[Todos] Add';
-  add(newTodo: any): Action {
-    return {
-      type: TodoActions.ADD,
-      payload: newTodo
-    };
-  }
-
-  static SAVED_ADD = '[Todos] Saved Add';
-  savedAdd(newTodo: any): Action {
-    return {
-      type: TodoActions.SAVED_ADD,
-      payload: newTodo
-    };
-  }
-
-  static ADD_EVENT_FROM_DB = '[Todos] Add event from DB';
-  addEventFromDb(newTodo: any): Action {
-    return {
-      type: TodoActions.ADD_EVENT_FROM_DB,
-      payload: newTodo
-    };
-  }
-
-  static COMPLETE = '[Todos] Complete';
-  complete(todo: any): Action {
-    return {
-      type: TodoActions.COMPLETE,
-      payload: todo
-    };
-  }
-
-  static DELETE = '[Todos] Delete';
-  delete(todo: any): Action {
-    return {
-      type: TodoActions.DELETE,
-      payload: todo
-    };
-  }
-}
+//filter actions
+export const SHOW_ALL = 'SHOW_ALL';
+export const SHOW_COMPLETED = 'SHOW_COMPLETED';
+export const SHOW_ACTIVE = 'SHOW_ACTIVE';

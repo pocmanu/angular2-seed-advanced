@@ -1,16 +1,16 @@
-<div>
-      <h2>Todos</h2>
-      <new-todo-input (create)="addTodo($event)"></new-todo-input>
-      =========
-      <todo-list
-        [todos]="todos | async"
-        (complete)="completeTodo($event)"
-        (delete)="deleteTodo($event)"
-      ></todo-list>
-      =========
-      <div>
-        <button (click)="show('ALL')">All</button>
-        <button (click)="show('PENDING')">Pending</button>
-        <button (click)="show('COMPLETE')">Complete</button>
-      </div>
+<div id="layout" class="pure-g">
+	<div class="sidebar pure-u-1 pure-u-md-1-4">
+		<div class="header">
+			<h1 class="brand-title">NgRx Store</h1>
+			<h2 class="brand-tagline">Example #4 - Todos Undo/Redo</h2>
+		</div>
+	</div>
+	<div class="content pure-u-1 pure-u-md-3-4">
+		<todo-input (addTodo)="addTodo($event)"></todo-input>
+		<button class="pure-button" (click)="undo()">Undo</button>
+		<button class="pure-button" (click)="redo()">Redo</button>
+		<filter-select (filterSelect)="updateFilter($event)"></filter-select>
+		<todo-list [todosModel]="todosModel$ | async" (removeTodo)="removeTodo($event)" (toggleTodo)="toggleTodo($event)">
+		</todo-list>
+	</div>
 </div>

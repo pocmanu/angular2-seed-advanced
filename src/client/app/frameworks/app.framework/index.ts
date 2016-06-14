@@ -1,16 +1,20 @@
 // libs
-import {provideStore} from '@ngrx/store';
+import {provideStore, combineReducers} from '@ngrx/store';
+import {compose} from "@ngrx/core/compose";
+import {storeLogger} from "ngrx-store-logger";
 
 // app
 import {nameListReducer} from './services/name-list.service';
 import {MULTILINGUAL_PROVIDERS, MultilingualStateI, multilingualReducer} from '../i18n.framework/index';
 import {counter} from '../../../app/components/counter/counter.component';
 import * as todosServices from './services/todos.service';
-import  todoReducer  from './services/todos/todos.reducer';
-import { TodoActions } from './services/todos/todos.actions';
 import { runEffects } from '@ngrx/effects';
 import { HoodieEffects } from './services/hoodie.effect';
 import { HoodieProvider } from './services/hoodie-provider.service';
+
+import {todos} from "./services/todos/todos.reducer";
+import {visibilityFilter} from "./services/todos/visibility-filter.reducer";
+import {undoable} from "./services/undoable/undoable.reducer";
 
 // state definition
 export interface AppStoreI {
@@ -20,16 +24,16 @@ export interface AppStoreI {
 
 export const APP_PROVIDERS: any[] = [
   MULTILINGUAL_PROVIDERS,
-  TodoActions,
   HoodieProvider,
-  provideStore({ 
+  provideStore(
+    compose(storeLogger(), combineReducers)({ 
     i18n: multilingualReducer,
     names: nameListReducer,
     counter: counter,
-    todos: todoReducer,
-    visibilityFilter: todosServices.visibilityFilter
-  }),
-  runEffects([HoodieEffects])
+    todos: undoable(todos),
+    visibilityFilter: visibilityFilter
+  })),
+//  runEffects([HoodieEffects])
 ];
 
 // services
