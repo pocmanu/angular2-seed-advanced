@@ -1,56 +1,57 @@
-import {BaseComponent} from '../../frameworks/core.framework/index';
-import {NgGrid, NgGridItem, NgGridConfig, NgGridItemConfig} from 'angular2-grid';
+import { ViewEncapsulation, ChangeDetectionStrategy, EventEmitter } from '@angular/core';
+import { Observable, BehaviorSubject } from 'rxjs/Rx';
+import { BaseComponent } from '../../frameworks/core.framework/index';
+import { NgGrid, NgGridItem, NgGridConfig, NgGridItemConfig } from 'angular2-grid';
+import { CalendarEventComponent } from './calendar-event.component';
+import { CalendarService, CalendarEvent } from './calendar.service';
+import * as _ from 'lodash';
 
 @BaseComponent({
   selector: 'sd-calendar',
   templateUrl: './app/components/calendar/calendar.component.html',
   styleUrls: ['./app/components/calendar/calendar.component.css'],
-  directives: [NgGrid, NgGridItem]
+  directives: [NgGrid, NgGridItem, CalendarEventComponent],
+  encapsulation: ViewEncapsulation.None,
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class CalendarComponent  {
+export class CalendarComponent {
 
   private _config: any = {
-      rowToMin: 5,
-      calStartTime: new Date(2016, 5, 20, 8, 0, 0, 0)
-    };
+    rowToMin: 5,
+    calStartTime: new Date(1970, 1, 1, 8, 0, 0, 0)
+  };
 
-  private _eventTableConfig: NgGridConfig = {margins: [0, 0], min_cols: 1, max_cols: 6, min_height: 14, 
-                 col_width: 130, row_height:7, cascade:'none'};
+  private _eventTableConfig: NgGridConfig = {
+    margins: [0, 0], min_cols: 1, max_cols: 6, min_height: 14,
+    col_width: 130, row_height: 6, cascade: 'none'
+  };
 
   private _titles: Array<any> = [
-      { title: 'Lundi',    config: { row: 1, col: 1, sizex: 1, sizey: 1, draggable: false, resizable: true, fixed: true } },
-      { title: 'Mardi',    config: { row: 1, col: 2, sizex: 1, sizey: 1, draggable: false, resizable: false, fixed: true } },
-      { title: 'Mercredi', config: { row: 1, col: 3, sizex: 1, sizey: 1, draggable: false, resizable: false, fixed: true } },
-      { title: 'Jeudi',    config: { row: 1, col: 4, sizex: 1, sizey: 1, draggable: false, resizable: false, fixed: true } },
-      { title: 'Vendredi', config: { row: 1, col: 5, sizex: 1, sizey: 1, draggable: false, resizable: false, fixed: true } }
+    { title: 'Lundi', config: { row: -2, col: 1, sizex: 1, sizey: 3, draggable: false, resizable: false, fixed: true } },
+    { title: 'Mardi', config: { row: -2, col: 2, sizex: 1, sizey: 3, draggable: false, resizable: false, fixed: true } },
+    { title: 'Mercredi', config: { row: -2, col: 3, sizex: 1, sizey: 3, draggable: false, resizable: false, fixed: true } },
+    { title: 'Jeudi', config: { row: -2, col: 4, sizex: 1, sizey: 3, draggable: false, resizable: false, fixed: true } },
+    { title: 'Vendredi', config: { row: -2, col: 5, sizex: 1, sizey: 3, draggable: false, resizable: false, fixed: true } }
   ];
 
-  private _events: Array<CalendarEvent> = [
-    { id: 1, title: 'Math', start: new Date(2016, 5, 20, 10, 0, 0), duration: 60 },
-    { id: 2, title: 'Français', start: new Date(2016, 5, 21, 15, 0, 0), duration: 120 }
-  ];
+  private _events: Observable<Array<CalendarEvent>> = Observable.of([
+    { id: 1, title: 'Math', start: new Date(1970, 1, 1, 10, 0, 0), duration: 60 },
+    { id: 2, title: 'Français', start: new Date(1970, 1, 2, 11, 0, 0), duration: 90 }
+  ]);
 
-  onClick(box: NgGridItem) {
-    console.log(box.config);
-  }
+  private events$: Observable<any>;
 
-  getConfig(event: CalendarEvent): NgGridItemConfig {
-    let duration: number = event.duration;
-		let settings: NgGridItemConfig = { row: 0, col: 0, sizex: 0, sizey: 0 };
-		settings.col   = Math.trunc((event.start.getTime() - this._config.calStartTime.getTime()) / (1000 * 60 * 60 * 24)) + 1;
-		settings.row   = Math.trunc((event.start.getTime() - this._config.calStartTime.getTime() - (settings.col - 1) * 1000 * 60 * 60 * 24) / (this._config.rowToMin * 1000 * 60)) + 1;
-		settings.sizey = Math.trunc(duration / this._config.rowToMin);
-		settings.sizex = 1;
-		return settings;
+  private timeline: Observable<any[]>;
+
+  private calendarService: CalendarService
+
+  constructor() {
+    this.calendarService = new CalendarService(this._config);
+    this.events$ = this._events.map(events => events.map((event) => Object.assign({}, event, { config: this.calendarService.getConfig(event) })));
+    this.timeline = this._events.map(events => events.map(event => this.calendarService.getTimes(event)))
+      .map(times => 
+        _.uniqWith(_.flatten(times), _.isEqual)
+        .map(time => Object.assign({}, {title:time}, { config: this.calendarService.getConfigForTimeline(time) }))
+      )
   }
-  
-  updateEvent(event:any) {
-    console.log(event);
-  }
-}
-interface CalendarEvent {
-  id: number;
-  title: String;
-  start: Date;
-  duration: number;
 }

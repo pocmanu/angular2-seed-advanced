@@ -2,15 +2,31 @@
 	background-color: #efefef;
 	width: 100%;
 	min-height: 750px;
+	margin-top: 30px;
+	margin-left: 50px;
 }
 
 .grid-item {
-	background-color: #ffffff;
+	background-color: #0fffff;
 	-webkit-transition: width 0.25s, height 0.25s, left 0.25s, top 0.25s, right 0.25s, bottom 0.25s;
 	-moz-transition: width 0.25s, height 0.25s, left 0.25s, top 0.25s, right 0.25s, bottom 0.25s;
 	-o-transition: width 0.25s, height 0.25s, left 0.25s, top 0.25s, right 0.25s, bottom 0.25s;
 	transition: width 0.25s, height 0.25s, left 0.25s, top 0.25s, right 0.25s, bottom 0.25s;
 	border: solid 1px;
+}
+
+.grid-item.timeline {
+	text-align: end;
+	margin-left: 120px;
+	margin-top: -7px;
+	background-color: transparent;
+	font-size: 0.8em;
+	border: none;
+}
+
+.grid-item.title {
+	text-align: center;
+	font-weight: bold;
 }
 
 .grid-item:active, .grid-item.moving {
@@ -22,7 +38,15 @@
 }
 
 .grid-placeholder {
-	background-color: rgba(0, 0, 0, 0.3);
+	background-color: rgba(100, 0, 0, 0.3);
+}
+
+.event-name {
+	line-height: 100%;
+	text-align: center;
+	vertical-align: middle;
+	display:inline-block;
+	height: 100%
 }
 
 @media (max-width: 767px) {
@@ -35,6 +59,7 @@
 		position: static !important;
 		width: 100% !important;
 		margin-bottom: 10px;
+		transform: none !important;
 	}
 	.grid-item:last-child {
 		margin-bottom: 0;

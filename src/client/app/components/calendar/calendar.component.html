@@ -1,9 +1,10 @@
 <div [ngGrid]="_eventTableConfig">
-    <div *ngFor="let box of _titles" [(ngGridItem)]="box.config" (click)="onClick(box)">
-        <div class="title">{{box.title}}</div>
-        <p>{{box.text}}</p>
+    <div *ngFor="let box of _titles" [ngGridItem]="box.config" class="title">
+        {{box.title}}
     </div>
-    <div *ngFor="let event of _events" [ngGridItem]="getConfig(event)" (ngGridItem)="updateEvent($event)">
-        <div class="title">{{event.title}}</div>
+     <div *ngFor="let box of timeline | async" [ngGridItem]="box.config" class="grid-item timeline">
+        {{box.title | date:"HH:mm"}}
     </div>
+    <calendar-event *ngFor="let event of events$ | async" [eventData]="event" [config]="event.config" [calendarService]="calendarService">
+    </calendar-event>
 </div>
