@@ -1,6 +1,5 @@
 // angular
 import {ChangeDetectionStrategy} from '@angular/core';
-import {RouteConfig} from '@angular/router-deprecated';
 
 // app
 import {NameListService} from '../../frameworks/app.framework/index';
@@ -9,11 +8,6 @@ import {RouteComponent, PlatformDirective} from '../../frameworks/core.framework
 import {LangSwitcherComponent} from '../../frameworks/i18n.framework/index';
 import {NavbarComponent} from './navbar.component';
 import {ToolbarComponent} from './toolbar.component';
-import {HomeComponent} from '../home/home.component';
-import {AboutComponent} from '../about/about.component';
-import {CalendarComponent} from '../calendar/calendar.component';
-import {TodosComponent} from '../todo/todos.component';
-import {CounterComponent} from '../counter/counter.component';
 
 @RouteComponent({
   moduleId: module.id,
@@ -23,33 +17,6 @@ import {CounterComponent} from '../counter/counter.component';
   directives: [LangSwitcherComponent, NavbarComponent, ToolbarComponent, PlatformDirective],
   changeDetection: ChangeDetectionStrategy.Default // Everything else uses OnPush
 })
-@RouteConfig([
-  {
-    path: '/',
-    component: HomeComponent,
-    name: 'Home'
-  },
-  {
-    path: '/about',
-    component: AboutComponent,
-    name: 'About'
-  },
-  {
-    path: '/calendar',
-    component: CalendarComponent,
-    name: 'Calendar'
-  },
-  {
-    path: '/todos',
-    component: TodosComponent,
-    name: 'Todos'
-  },
-  {
-    path: '/counter',
-    component: CounterComponent,
-    name: 'Counter'
-  }
-])
 export class AppComponent {
   constructor(public analytics: AnalyticsService) {
 
