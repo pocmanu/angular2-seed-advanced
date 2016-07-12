@@ -1,6 +1,7 @@
 import { ViewEncapsulation, ChangeDetectionStrategy, EventEmitter } from '@angular/core';
 import { Observable, BehaviorSubject } from 'rxjs/Rx';
-import { BaseComponent } from '../../frameworks/core.framework/index';
+import { BaseComponent } from '../../frameworks/core/index';
+import { CalendarService } from '../../frameworks/app/index';
 import { NgGrid, NgGridItem, NgGridConfig, NgGridItemConfig, NgGridItemEvent } from 'angular2-grid';
 import { CalendarEventComponent } from './calendar-event.component';
 import { CalendarHelper, CalendarEvent } from './calendar.helper';
@@ -45,8 +46,8 @@ export class CalendarComponent {
 
   private calendarHelper: CalendarHelper
 
-  constructor() {
-    this.calendarHelper = new CalendarHelper(this._config);
+  constructor(private calendarService: CalendarService) {
+    this.calendarHelper = new CalendarHelper(this._config, this.calendarService);
     this.events$ = this._events.map(events => events.map((event) => Object.assign({}, event, { config: this.calendarHelper.getConfig(event) })));
     this.timeline = this._events.map(events => events.map(event => this.calendarHelper.getTimes(event)))
       .map(times => 

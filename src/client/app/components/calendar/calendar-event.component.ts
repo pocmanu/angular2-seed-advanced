@@ -1,5 +1,5 @@
 import { Input, Output, EventEmitter, ChangeDetectionStrategy, ElementRef } from "@angular/core";
-import { BaseComponent } from '../../frameworks/core.framework/index';
+import { BaseComponent } from '../../frameworks/core/index';
 import { NgGridItem, NgGridItemConfig, NgGridItemEvent } from 'angular2-grid';
 import { CalendarHelper } from './calendar.helper';
 
