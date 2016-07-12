@@ -22,7 +22,6 @@ module.exports = function(config) {
       'node_modules/core-js/client/shim.min.js',
 
       // System.js for module loading
-      'node_modules/systemjs/dist/system-polyfills.js',
       'node_modules/systemjs/dist/system.src.js',
 
       // Zone.js dependencies
@@ -63,7 +62,6 @@ module.exports = function(config) {
 
     // list of files to exclude
     exclude: [
-      'src/client/app/frameworks/nativescript.framework/**/*spec.js',
       'node_modules/**/*spec.js'
     ],
 

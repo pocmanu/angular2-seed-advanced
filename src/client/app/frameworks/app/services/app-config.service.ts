@@ -1,5 +1,5 @@
 // app
-import {ILang} from '../../core.framework/index';
+import {ILang} from '../../core/index';
 
 export class AppConfigService {
   

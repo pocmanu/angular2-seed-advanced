@@ -5,9 +5,9 @@ import {getDOM} from '@angular/platform-browser/src/dom/dom_adapter';
 // libs
 import {provideStore} from '@ngrx/store';
 
-import {t} from '../../test.framework/index';
-import {ILang} from '../../core.framework/index';
-import {TEST_CORE_PROVIDERS, TEST_HTTP_PROVIDERS, TEST_ROUTER_PROVIDERS} from '../../core.framework/testing/index';
+import {t} from '../../test/index';
+import {ILang} from '../../core/index';
+import {TEST_CORE_PROVIDERS, TEST_HTTP_PROVIDERS, TEST_ROUTER_PROVIDERS} from '../../core/testing/index';
 import {LangSwitcherComponent, MultilingualService, multilingualReducer} from '../index';
 import {TEST_MULTILINGUAL_PROVIDERS, TEST_MULTILINGUAL_RESET} from '../testing/index';
 
@@ -20,7 +20,7 @@ const SUPPORTED_LANGUAGES: Array<ILang> = [
 ];
 
 export function main() {
-  t.describe('i18n.framework:', () => {
+  t.describe('i18n:', () => {
     t.describe('@Component: LangSwitcherComponent', () => {
       t.bep(() => [
         TEST_CORE_PROVIDERS(),

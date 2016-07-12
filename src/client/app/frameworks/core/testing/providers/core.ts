@@ -6,7 +6,7 @@ import {Store} from '@ngrx/store';
 
 // app
 import {WindowService, ConsoleService, LogService} from '../../index';
-import {ANALYTICS_PROVIDERS} from '../../../analytics.framework/index';
+import {ANALYTICS_PROVIDERS} from '../../../analytics/index';
 
 // mocks
 import {StoreMock} from '../mocks/store.mock';

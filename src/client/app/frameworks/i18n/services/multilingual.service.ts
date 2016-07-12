@@ -7,8 +7,8 @@ import {Store, ActionReducer, Action} from '@ngrx/store';
 import {TranslateService} from 'ng2-translate/ng2-translate';
 
 // app
-import {Analytics, AnalyticsService} from '../../analytics.framework/index';
-import {WindowService, ILang} from '../../core.framework/index';
+import {Analytics, AnalyticsService} from '../../analytics/index';
+import {WindowService, ILang} from '../../core/index';
 
 // analytics
 const CATEGORY: string = 'Multilingual';

@@ -1,16 +1,16 @@
 // libs
 import {provideStore, Store} from '@ngrx/store';
 
-import {t} from '../../test.framework/index';
-// import {TEST_CORE_PROVIDERS, TEST_HTTP_PROVIDERS, TEST_ROUTER_PROVIDERS, WindowMockFrench} from '../../core.framework/testing/index';
-import {TEST_CORE_PROVIDERS, TEST_HTTP_PROVIDERS, TEST_ROUTER_PROVIDERS} from '../../core.framework/testing/index';
+import {t} from '../../test/index';
+// import {TEST_CORE_PROVIDERS, TEST_HTTP_PROVIDERS, TEST_ROUTER_PROVIDERS, WindowMockFrench} from '../../core/testing/index';
+import {TEST_CORE_PROVIDERS, TEST_HTTP_PROVIDERS, TEST_ROUTER_PROVIDERS} from '../../core/testing/index';
 // import {TEST_MULTILINGUAL_PROVIDERS, TEST_MULTILINGUAL_RESET} from '../testing/index';
 import {TEST_MULTILINGUAL_PROVIDERS} from '../testing/index';
-// import {ILang, WindowService} from '../../core.framework/index';
+// import {ILang, WindowService} from '../../core/index';
 import {MultilingualService, MultilingualStateI, multilingualReducer} from '../index';
 
 export function main() {
-  t.describe('i18n.framework:', () => {
+  t.describe('i18n:', () => {
     t.describe('MultilingualService', () => {
       t.bep(() => [
         TEST_CORE_PROVIDERS(),

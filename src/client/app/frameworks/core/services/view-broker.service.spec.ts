@@ -1,8 +1,8 @@
-import {t} from '../../test.framework/index';
+import {t} from '../../test/index';
 import {CoreConfigService, ViewBrokerService} from '../index';
 
 export function main() {
-  t.describe('core.framework: ViewBrokerService', () => {
+  t.describe('core: ViewBrokerService', () => {
     t.be(() => CoreConfigService.RESET());
     
     t.it('TEMPLATE_URL: web', () => {   

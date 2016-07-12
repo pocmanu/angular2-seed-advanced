@@ -3,8 +3,8 @@ import {Store} from '@ngrx/store';
 import 'rxjs/add/operator/take';
 
 // app
-import {FormComponent, CoreConfigService, LogService, ILang} from '../../core.framework/index';
-import {ElectronEventService} from '../../electron.framework/index';
+import {FormComponent, CoreConfigService, LogService, ILang} from '../../core/index';
+import {ElectronEventService} from '../../electron/index';
 import {MultilingualService} from '../index';
 
 @FormComponent({

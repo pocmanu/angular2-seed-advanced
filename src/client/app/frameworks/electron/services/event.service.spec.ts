@@ -1,9 +1,9 @@
-import {t} from '../../test.framework/index';
+import {t} from '../../test/index';
 import {ElectronEventService} from './event.service';
 declare var window: any;
 
 export function main() {
-  t.describe('electron.framework: ElectronEventService', () => {
+  t.describe('electron: ElectronEventService', () => {
     let spyWindowRemoveEvent: any;
     let customEvent: any = new CustomEvent('customEvent', { detail: { value: 'test' } });
     let otherEvent: any = new CustomEvent('otherEvent', { detail: { value: 'test2' } });

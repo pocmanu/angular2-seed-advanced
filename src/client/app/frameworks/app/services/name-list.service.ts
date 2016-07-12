@@ -5,8 +5,8 @@ import {Observable} from 'rxjs/Observable';
 import {Store, ActionReducer, Action} from '@ngrx/store';
 
 // app
-import {Analytics, AnalyticsService} from '../../analytics.framework/index';
-import {HttpService} from '../../core.framework/index';
+import {Analytics, AnalyticsService} from '../../analytics/index';
+import {HttpService} from '../../core/index';
 
 // analytics
 const CATEGORY: string = 'NameList';

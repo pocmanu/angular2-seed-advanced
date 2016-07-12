@@ -9,10 +9,10 @@ import {provideStore} from '@ngrx/store';
 import {TranslateService} from 'ng2-translate/ng2-translate';
 
 // app
-import {ConsoleService, LogService} from '../../app/frameworks/core.framework/index';
-import {AnalyticsService} from '../../app/frameworks/analytics.framework/index';
-import {AppConfigService, nameListReducer} from '../../app/frameworks/app.framework/index';
-import {MultilingualService, multilingualReducer} from '../../app/frameworks/i18n.framework/index';
+import {ConsoleService, LogService} from '../../app/frameworks/core/index';
+import {AnalyticsService} from '../../app/frameworks/analytics/index';
+import {AppConfigService, nameListReducer} from '../../app/frameworks/app/index';
+import {MultilingualService, multilingualReducer} from '../../app/frameworks/i18n/index';
 import {NSAngulartics2Segment} from './services/ns-angulartics2-segment.service';
 // custom i18n language support
 MultilingualService.SUPPORTED_LANGUAGES = AppConfigService.SUPPORTED_LANGUAGES;

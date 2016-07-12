@@ -5,7 +5,7 @@ import {storeLogger} from "ngrx-store-logger";
 
 // app
 import {nameListReducer} from './services/name-list.service';
-import {MULTILINGUAL_PROVIDERS, MultilingualStateI, multilingualReducer} from '../i18n.framework/index';
+import {MULTILINGUAL_PROVIDERS, MultilingualStateI, multilingualReducer} from '../i18n/index';
 import {counter} from '../../../app/components/counter/counter.component';
 import { runEffects } from '@ngrx/effects';
 import { HoodieEffects } from './services/hoodie.effect';

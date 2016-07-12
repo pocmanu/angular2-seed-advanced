@@ -6,12 +6,12 @@ import {provideStore} from '@ngrx/store';
 import {Observable} from 'rxjs/Rx';
 
 // app
-import {t} from '../../test.framework/index';
-import {TEST_CORE_PROVIDERS, GET_HTTP_PROVIDERS_INJECTOR, TEST_ROUTER_PROVIDERS} from '../../core.framework/testing/index';
+import {t} from '../../test/index';
+import {TEST_CORE_PROVIDERS, GET_HTTP_PROVIDERS_INJECTOR, TEST_ROUTER_PROVIDERS} from '../../core/testing/index';
 import {NameListService, nameListReducer} from './name-list.service';
 
 export function main() {
-  t.describe('app.framework: NameListService', () => {
+  t.describe('app: NameListService', () => {
     let nameList: NameListService;
     
     t.be(() => {
