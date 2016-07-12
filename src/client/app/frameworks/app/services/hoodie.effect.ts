@@ -20,10 +20,10 @@ import {Store} from '@ngrx/store';
 
 @Injectable()
 export class HoodieEffects {
-  private store : any;
+  private hoodieStore : any;
   constructor(private updates$: StateUpdates<any>, private hoodieProvider: HoodieProvider, private todoActions:TodoActions, private reduxstore:Store) { 
-      this.store = hoodieProvider.getHoodie().store('todos');
-      Observable.fromEvent(this.store, 'add').subscribe((data) => {
+      this.hoodieStore = hoodieProvider.getHoodie().store('todos');
+      Observable.fromEvent(this.hoodieStore, 'add').subscribe((data) => {
           console.log("====================================");
           console.log(data);
           this.reduxstore.dispatch(this.todoActions.addEventFromDb(data))
@@ -31,7 +31,7 @@ export class HoodieEffects {
       });
 
       //setTimeout(()=>this.store.add({text:"waf"}), 10000);
-      Observable.fromPromise(this.store.findAll()).subscribe(todos => todos.forEach(element => {
+      Observable.fromPromise(this.hoodieStore.findAll()).subscribe(todos => todos.forEach(element => {
           /*let todo:any = {};
           todo[element.id] = element;
           console.log(todo)*/
@@ -43,7 +43,7 @@ export class HoodieEffects {
   @Effect() addInHoodie$ = this.updates$
     .whenAction(TodoActions.ADD)
     .map<any>(toPayload)
-    .mergeMap(todo => Observable.fromPromise(this.store.add(JSON.parse(JSON.stringify(todo))))
+    .mergeMap(todo => Observable.fromPromise(this.hoodieStore.add(JSON.parse(JSON.stringify(todo))))
         .map((savedTodo: any) => this.todoActions.savedAdd(savedTodo)));
 
   //@Effect() hoodieAdd$ = Observable.fromEvent(this.store, 'add')
