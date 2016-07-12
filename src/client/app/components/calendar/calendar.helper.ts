@@ -1,13 +1,17 @@
 import { NgGridConfig, NgGridItemConfig } from 'angular2-grid';
 
-export class CalendarService {
+import { CalendarService, CalendarEvent } from '../../frameworks/app/index';
 
-    private _config: any = {
-        rowToMin: 1,
-        calStartTime: new Date(1970, 1, 1, 0, 0, 0, 0)
+export { CalendarEvent } from '../../frameworks/app/index';
+
+export class CalendarHelper {
+
+    private _config: {
+        rowToMin: number,
+        calStartTime: Date
     };
 
-    constructor(config: { rowToMin: number, calStartTime: Date }) {
+    constructor(config: { rowToMin: number, calStartTime: Date }, private calendarService: CalendarService) {
         this._config = config;
     }
 
@@ -41,10 +45,4 @@ export class CalendarService {
         start.setMinutes(event.start.getMinutes());
         return [start, new Date(start.getTime() + event.duration * 60 * 1000)];
     }
-}
-export interface CalendarEvent {
-    id: number;
-    title: String;
-    start: Date;
-    duration: number;
 }

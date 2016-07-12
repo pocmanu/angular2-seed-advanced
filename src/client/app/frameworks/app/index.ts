@@ -10,6 +10,7 @@ import {counter} from '../../../app/components/counter/counter.component';
 import { runEffects } from '@ngrx/effects';
 import { HoodieEffects } from './services/hoodie.effect';
 import { HoodieProvider } from './services/hoodie-provider.service';
+import { CalendarService, CalendarEvent } from './services/calendar/calendar.service';
 
 import {todos} from "./services/todos/todos.reducer";
 import {visibilityFilter} from "./services/todos/visibility-filter.reducer";
@@ -39,3 +40,4 @@ export const APP_PROVIDERS: any[] = [
 export * from './services/app-config.service';
 export * from './services/name-list.service';
 export * from './services/todos/todos.actions';
+export * from './services/calendar/calendar.service';

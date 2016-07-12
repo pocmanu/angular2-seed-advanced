@@ -41,12 +41,21 @@
 	background-color: rgba(100, 0, 0, 0.3);
 }
 
+.event {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	align-items: stretch;
+}
+
 .event-name {
 	line-height: 100%;
 	text-align: center;
-	vertical-align: middle;
-	display:inline-block;
-	height: 100%
+}
+
+.event-time {
+	font-size: 0.8em;
+	font-style: italic;
 }
 
 @media (max-width: 767px) {

@@ -1,9 +1,9 @@
 import { ViewEncapsulation, ChangeDetectionStrategy, EventEmitter } from '@angular/core';
 import { Observable, BehaviorSubject } from 'rxjs/Rx';
 import { BaseComponent } from '../../frameworks/core.framework/index';
-import { NgGrid, NgGridItem, NgGridConfig, NgGridItemConfig } from 'angular2-grid';
+import { NgGrid, NgGridItem, NgGridConfig, NgGridItemConfig, NgGridItemEvent } from 'angular2-grid';
 import { CalendarEventComponent } from './calendar-event.component';
-import { CalendarService, CalendarEvent } from './calendar.service';
+import { CalendarHelper, CalendarEvent } from './calendar.helper';
 import * as _ from 'lodash';
 
 @BaseComponent({
@@ -43,15 +43,19 @@ export class CalendarComponent {
 
   private timeline: Observable<any[]>;
 
-  private calendarService: CalendarService
+  private calendarHelper: CalendarHelper
 
   constructor() {
-    this.calendarService = new CalendarService(this._config);
-    this.events$ = this._events.map(events => events.map((event) => Object.assign({}, event, { config: this.calendarService.getConfig(event) })));
-    this.timeline = this._events.map(events => events.map(event => this.calendarService.getTimes(event)))
+    this.calendarHelper = new CalendarHelper(this._config);
+    this.events$ = this._events.map(events => events.map((event) => Object.assign({}, event, { config: this.calendarHelper.getConfig(event) })));
+    this.timeline = this._events.map(events => events.map(event => this.calendarHelper.getTimes(event)))
       .map(times => 
         _.uniqWith(_.flatten(times), _.isEqual)
-        .map(time => Object.assign({}, {title:time}, { config: this.calendarService.getConfigForTimeline(time) }))
+        .map(time => Object.assign({}, {title:time}, { config: this.calendarHelper.getConfigForTimeline(time) }))
       )
+  }
+
+  updateEvent = (event: NgGridItemEvent) => {
+    console.log(event);
   }
 }

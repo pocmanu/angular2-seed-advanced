@@ -1,8 +1,10 @@
 <div [ngGridItem]="config"
         (onChangeStart)="startChanging($event)" (onChangeStop)="stopChanging($event)"
-        (onChange)="onChange($event)"
-        style="text-align: center">
-    <span class="time" [hidden]="!changing">{{startTime | date:"HH:mm" }}</span>
-    <p class="event-name">{{eventData.title}}</p>
-    <span class="time" [hidden]="!changing">{{endTime | date:"HH:mm" }}</span>
+        (onChange)="update($event)"
+        class="event">
+    <div class="event-time" style="align-self:flex-start" [hidden]="!changing">{{startTime | date:"HH:mm" }}</div>
+    <div></div>
+    <div class="event-name">{{eventData.title}}</div>
+    <div></div>
+    <div class="event-time" style="align-self:flex-end" [hidden]="!changing">{{endTime | date:"HH:mm" }}</div>
 </div>

@@ -5,6 +5,8 @@
      <div *ngFor="let box of timeline | async" [ngGridItem]="box.config" class="grid-item timeline">
         {{box.title | date:"HH:mm"}}
     </div>
-    <calendar-event *ngFor="let event of events$ | async" [eventData]="event" [config]="event.config" [calendarService]="calendarService">
+    <calendar-event *ngFor="let event of events$ | async" 
+        [eventData]="event" [config]="event.config" [calendarHelper]="calendarHelper"
+        (onChange)="updateEvent($event)">
     </calendar-event>
 </div>

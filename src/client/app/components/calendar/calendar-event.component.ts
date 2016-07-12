@@ -1,8 +1,7 @@
 import { Input, Output, EventEmitter, ChangeDetectionStrategy, ElementRef } from "@angular/core";
-import { Date } from '@angular/';
 import { BaseComponent } from '../../frameworks/core.framework/index';
-import { NgGridItem, NgGridItemConfig } from 'angular2-grid';
-import { CalendarService } from './calendar.service';
+import { NgGridItem, NgGridItemConfig, NgGridItemEvent } from 'angular2-grid';
+import { CalendarHelper } from './calendar.helper';
 
 @BaseComponent({
     selector: 'calendar-event',
@@ -13,24 +12,27 @@ export class CalendarEventComponent {
 
     @Input() eventData: any;
     @Input() config: NgGridItemConfig;
-    @Input() calendarService: CalendarService;
+    @Input() calendarHelper: CalendarHelper;
 
-    private changing : boolean = false;
+    @Output() onChange: EventEmitter<NgGridItemEvent> = new EventEmitter<NgGridItemEvent>();
+
+    private changing: boolean = false;
     private startTime: Date;
     private endTime: Date;
 
-    constructor() {}
+    constructor() { }
 
-    startChanging = (event: any) => {
+    startChanging = (event: NgGridItemEvent) => {
         this.changing = true;
     }
 
-    stopChanging = (event: any) => {
+    stopChanging = (event: NgGridItemEvent) => {
         this.changing = false;
+        this.onChange.next(event);
     }
 
-    onChange = (event: {col: number, row: number, sizex: number, sizey: number}) => {
-        this.startTime = this.calendarService.getTimeForRow(event.row);
-        this.endTime = this.calendarService.getTimeForRow(event.row + event.sizey);
+    update = (event: NgGridItemEvent) => {
+        this.startTime = this.calendarHelper.getTimeForRow(event.row);
+        this.endTime = this.calendarHelper.getTimeForRow(event.row + event.sizey);
     }
 }
