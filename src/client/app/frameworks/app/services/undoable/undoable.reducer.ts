@@ -1,5 +1,5 @@
-import {ActionReducer, Action} from "@ngrx/store";
-import {UndoableState} from "./undoable.interface";
+import {ActionReducer, Action} from '@ngrx/store';
+import {UndoableState} from './undoable.interface';
 
 //based on Rob Wormald's example http://plnkr.co/edit/UnU1wnFcausVFfEP2RGD?p=preview
 /*
@@ -9,16 +9,16 @@ import {UndoableState} from "./undoable.interface";
     Example local-storage: https://github.com/btroncone/ngrx-store-localstorage/tree/storev2
     Example logger: https://github.com/btroncone/ngrx-store-logger/tree/loggerv2
 */
-export function undoable(reducer : ActionReducer<any>) {
+export function undoable(reducer: ActionReducer<any>) {
     // Call the reducer with empty action to populate the initial state
-    const initialState : UndoableState = {
+    const initialState: UndoableState = {
         past: [],
-        present: reducer(undefined, {type: '__INIT__'}),
+        present: reducer(undefined, { type: '__INIT__' }),
         future: []
     };
 
     // Return a reducer that handles undo and redo
-    return function (state = initialState, action : Action) {
+    return function (state = initialState, action: Action) {
         const { past, present, future } = state;
         switch (action.type) {
 
@@ -29,7 +29,7 @@ export function undoable(reducer : ActionReducer<any>) {
                     return {
                         past: newPast,
                         present: previous,
-                        future: [ present, ...future ]
+                        future: [present, ...future]
                     };
                 } else {
                     return state;
@@ -39,7 +39,7 @@ export function undoable(reducer : ActionReducer<any>) {
                     const next = future[0];
                     const newFuture = future.slice(1);
                     return {
-                        past: [ ...past, present ],
+                        past: [...past, present],
                         present: next,
                         future: newFuture
                     };
@@ -50,13 +50,13 @@ export function undoable(reducer : ActionReducer<any>) {
                 // Delegate handling the action to the passed reducer
                 const newPresent = reducer(present, action);
                 if (present === newPresent) {
-                    return state
+                    return state;
                 }
                 return {
-                    past: [ ...past, present ],
+                    past: [...past, present],
                     present: newPresent,
                     future: []
-                }
+                };
         }
-    }
+    };
 }

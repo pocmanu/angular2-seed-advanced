@@ -32,6 +32,13 @@ export class CalendarHelper {
         return settings;
     }
 
+    getEventData(config: NgGridItemConfig): {start: Date, duration: number} {
+        let data = {start: this._config.calStartTime, duration: 0};
+        data.duration = config.sizey * this._config.rowToMin;
+        data.start = new Date(data.start.getTime() + (config.col - 1) * 1000 * 60 * 60 * 24 + (config.row - 1) * this._config.rowToMin * 1000 * 60);
+        return data;
+    }
+
     getConfigForTimeline(time: Date) {
         let config = this.getConfig({start: time, duration: 15});
         config.col = -1;

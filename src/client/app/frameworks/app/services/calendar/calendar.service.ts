@@ -1,18 +1,23 @@
-import {ADD_EVENT, REMOVE_EVENT, UPDATE_EVENT} from "./calendar.actions";
+import {ADD_EVENT, REMOVE_EVENT, UPDATE_EVENT, INIT_EVENT} from './calendar.actions';
 import {Injectable} from '@angular/core';
-import {Store, Action} from '@ngrx/store';
+import {Store} from '@ngrx/store';
 import {Observable} from 'rxjs/Rx';
-import {CalendarEvent} from "./calendar.model";
+import {CalendarEvent} from './calendar.model';
 
-export {CalendarEvent} from "./calendar.model";
+export {CalendarEvent} from './calendar.model';
+export {calendarReducer} from './calendar.reducer';
 
 @Injectable()
 export class CalendarService {
 
-    private events: Observable<any>;
+    events: Observable<any>;
 
     constructor(private store: Store<any>) {
         this.events = store.select('events');
+        this.store.dispatch({ type: INIT_EVENT, payload: [
+            { id: 1, title: 'Math', start: new Date(1970, 1, 1, 10, 0, 0), duration: 60 },
+            { id: 2, title: 'Français', start: new Date(1970, 1, 2, 11, 0, 0), duration: 90 }
+        ]});
     }
 
     addEvent(event: CalendarEvent) {
@@ -24,6 +29,6 @@ export class CalendarService {
     }
 
     removeEvent(event: CalendarEvent) {
-        this.store.dispatch({ type: UPDATE_EVENT, payload: event.id });
+        this.store.dispatch({ type: REMOVE_EVENT, payload: event.id });
     }
 }

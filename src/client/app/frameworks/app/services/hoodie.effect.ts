@@ -24,10 +24,8 @@ export class HoodieEffects {
   constructor(private updates$: StateUpdates<any>, private hoodieProvider: HoodieProvider, private todoActions:TodoActions, private reduxstore:Store) { 
       this.hoodieStore = hoodieProvider.getHoodie().store('todos');
       Observable.fromEvent(this.hoodieStore, 'add').subscribe((data) => {
-          console.log("====================================");
           console.log(data);
-          this.reduxstore.dispatch(this.todoActions.addEventFromDb(data))
-          console.log("====================================");
+          this.reduxstore.dispatch(this.todoActions.addEventFromDb(data));
       });
 
       //setTimeout(()=>this.store.add({text:"waf"}), 10000);
@@ -36,7 +34,7 @@ export class HoodieEffects {
           todo[element.id] = element;
           console.log(todo)*/
           let todo = element;
-          this.reduxstore.dispatch(this.todoActions.addEventFromDb(todo))
+          this.reduxstore.dispatch(this.todoActions.addEventFromDb(todo));
       }));
   }
 

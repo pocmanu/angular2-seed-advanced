@@ -1,4 +1,4 @@
-<div [ngGrid]="_eventTableConfig">
+<div [ngGrid]="_eventTableConfig" style="height:400px">
     <div *ngFor="let box of _titles" [ngGridItem]="box.config" class="title">
         {{box.title}}
     </div>

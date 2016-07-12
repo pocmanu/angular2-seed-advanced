@@ -1,7 +1,7 @@
-import {ActionReducer} from "@ngrx/store";
+import {ActionReducer} from '@ngrx/store';
 
-export interface UndoableState{
-    past: any[],
-    present: ActionReducer<any>,
-    future: any[]
+export interface UndoableState {
+    past: any[];
+    present: ActionReducer<any>;
+    future: any[];
 }

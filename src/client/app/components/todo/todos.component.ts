@@ -3,10 +3,10 @@ import {TodoList} from "./todo-list.component";
 import {TodoInput} from "./todo-input.component";
 import {FilterSelect} from "./filter-select.component";
 import {Store} from '@ngrx/store';
-import {AppState, Todo, TodoModel} from "../../frameworks/app.framework/services/todos/todo.model";
+import {AppState, Todo, TodoModel} from "../../frameworks/app/services/todos/todo.model";
 import {Observable} from "rxjs/Observable";
-import {ADD_TODO, REMOVE_TODO, TOGGLE_TODO, } from "../../frameworks/app.framework/services/todos/todos.actions";
-import {UNDO, REDO} from "../../frameworks/app.framework/services/undoable/undoable.actions";
+import {ADD_TODO, REMOVE_TODO, TOGGLE_TODO, } from "../../frameworks/app/services/todos/todos.actions";
+import {UNDO, REDO} from "../../frameworks/app/services/undoable/undoable.actions";
 import 'rxjs/add/observable/combineLatest';
 
 @Component({

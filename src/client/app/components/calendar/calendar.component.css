@@ -1,7 +1,6 @@
 .grid {
 	background-color: #efefef;
-	width: 100%;
-	min-height: 750px;
+	max-width: 650px;
 	margin-top: 30px;
 	margin-left: 50px;
 }

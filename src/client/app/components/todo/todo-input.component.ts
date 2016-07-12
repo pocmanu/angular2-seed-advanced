@@ -13,7 +13,7 @@ import {Component, Output, EventEmitter} from '@angular/core';
 export class TodoInput {
     @Output() addTodo : EventEmitter<string> = new EventEmitter<string>();
 
-    add(todoInput){
+    add(todoInput: {value: string}){
         this.addTodo.emit(todoInput.value);
         todoInput.value = '';
     }

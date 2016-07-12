@@ -1,4 +1,4 @@
-import { Input, Output, EventEmitter, ChangeDetectionStrategy, ElementRef } from "@angular/core";
+import { Input, Output, EventEmitter } from '@angular/core';
 import { BaseComponent } from '../../frameworks/core/index';
 import { NgGridItem, NgGridItemConfig, NgGridItemEvent } from 'angular2-grid';
 import { CalendarHelper } from './calendar.helper';
@@ -20,15 +20,15 @@ export class CalendarEventComponent {
     private startTime: Date;
     private endTime: Date;
 
-    constructor() { }
-
     startChanging = (event: NgGridItemEvent) => {
         this.changing = true;
     }
 
     stopChanging = (event: NgGridItemEvent) => {
         this.changing = false;
-        this.onChange.next(event);
+        if (this.config.row !== event.row || this.config.col !== event.col || this.config.sizey !== event.sizey) {
+            this.onChange.next({id: this.eventData.id, newconfig: event});
+        }
     }
 
     update = (event: NgGridItemEvent) => {
