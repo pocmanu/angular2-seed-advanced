@@ -4,7 +4,7 @@ export interface AppState {
 }
 
 export interface Todo {
-    id: number,
+    id: string,
     text: string,
     complete: boolean
 }

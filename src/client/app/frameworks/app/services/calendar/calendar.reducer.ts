@@ -1,6 +1,6 @@
-import {ActionReducer, Action} from '@ngrx/store';
-import {CalendarEvent} from './calendar.model';
-import {ADD_EVENT, REMOVE_EVENT, UPDATE_EVENT, INIT_EVENT} from './calendar.actions';
+import { ActionReducer, Action } from '@ngrx/store';
+import { CalendarEvent } from './calendar.model';
+import { ADD_EVENT, REMOVE_EVENT, UPDATE_EVENT, INIT_EVENT } from './calendar.actions';
 
 export const calendarReducer: ActionReducer<CalendarEvent[]> = (state: CalendarEvent[] = [], action: Action) => {
     switch (action.type) {

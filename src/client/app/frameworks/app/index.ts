@@ -10,6 +10,7 @@ import {counter} from '../../../app/components/counter/counter.component';
 import { runEffects } from '@ngrx/effects';
 import { HoodieEffects } from './services/hoodie.effect';
 import { HoodieProvider } from './services/hoodie-provider.service';
+import { hoodie } from './services/hoodie/hoodie.reducer';
 import { calendarReducer } from './services/calendar/calendar.service';
 
 import {todos} from './services/todos/todos.reducer';
@@ -30,11 +31,11 @@ export const APP_PROVIDERS: any[] = [
     i18n: multilingualReducer,
     names: nameListReducer,
     counter: counter,
-    todos: undoable(todos),
-    events: calendarReducer,
+    todos: hoodie(todos),
+    events: undoable(calendarReducer),
     visibilityFilter: visibilityFilter
   })),
-//  runEffects([HoodieEffects])
+  runEffects([HoodieEffects])
 ];
 
 // services

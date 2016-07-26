@@ -3,6 +3,13 @@ import {Todo} from "./todo.model";
 import {ADD_TODO, REMOVE_TODO, TOGGLE_TODO} from "./todos.actions";
 
 export const todos : ActionReducer<Todo[]> = (state : Todo[] = [], action: Action) => {
+    if (ADD_TODO == action.type) {
+        console.log('pouf')
+       return [
+              ...state,
+              action.payload
+          ]; 
+    }
   switch(action.type) {
       case ADD_TODO:
           return [

@@ -41,7 +41,7 @@ export class TodosComponent {
 	addTodo(description: string) {
 		this._store.dispatch({
 			type: ADD_TODO, payload: {
-				id: ++this.id,
+				id: ''+ ++this.id,
 				description,
 				complete: false
 			}

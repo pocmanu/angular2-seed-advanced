@@ -1,5 +1,6 @@
-import {EventEmitter} from '@angular/core';
+import { Injectable, EventEmitter } from '@angular/core';
 
+@Injectable()
 export class HoodieProvider {
 
 	hoodie = new Hoodie();
