@@ -16,12 +16,12 @@ import * as _ from 'lodash';
 })
 export class CalendarComponent {
 
-  _config: any = {
+  private _config: any = {
     rowToMin: 5,
     calStartTime: new Date(1970, 1, 1, 8, 0, 0, 0)
   };
 
-  _eventTableConfig: NgGridConfig = {
+  private _eventTableConfig: NgGridConfig = {
     margins: [0, 0], min_cols: 1, max_cols: 5, max_rows: 102, min_height: 14,
     col_width: 130, row_height: 6, cascade: 'none'
   };
@@ -60,5 +60,17 @@ export class CalendarComponent {
     change.start = newData.start;
     change.duration = newData.duration;
     this.calendarService.updateEvent(change);
+  }
+
+  undo() {
+    this.calendarService.undo();
+  }
+
+  redo() {
+    this.calendarService.redo();
+  }
+
+  stop(event: any) {
+    console.log(event)
   }
 }

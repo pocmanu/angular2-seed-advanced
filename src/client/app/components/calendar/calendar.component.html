@@ -1,5 +1,9 @@
-<div [ngGrid]="_eventTableConfig" style="height:400px">
-    <div *ngFor="let box of _titles" [ngGridItem]="box.config" class="title">
+<div>
+    <button (click)="undo()">Undo</button>
+    <button (click)="redo()">Redo</button>
+</div>
+<div [ngGrid]="_eventTableConfig"  (dragover)="dragOver($event)" (drop)="addEvent($event)">
+    <div *ngFor="let box of _titles"  [ngGridItem]="box.config" class="title">
         {{box.title}}
     </div>
      <div *ngFor="let box of timeline | async" [ngGridItem]="box.config" class="grid-item timeline">
