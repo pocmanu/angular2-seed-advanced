@@ -1,32 +1,28 @@
 import { Injectable, EventEmitter } from '@angular/core';
+import { Observable } from 'rxjs/Rx';
+
+var Hoodie = require('@hoodie/client');
 
 @Injectable()
 export class HoodieProvider {
 
-	hoodie = new Hoodie();
+	hoodie = new Hoodie({url: 'http://localhost:6001'});
+	connectionStatus: Observable<Boolean>;
 
 	connected = new EventEmitter();
 
 	constructor() {
-		console.log(this.hoodie);
-/*		this.hoodie.account.on('signin', () => { console.log('signin'); this.connected.next(true); });
-		this.hoodie.account.on('authenticated', () => { console.log('reauthenticated'); this.connected.next(true); });
-		this.hoodie.account.on('signout error:unauthenticated', () => { this.connected.next(false); });
-		if (!this.hoodie.account.hasValidSession()) {
-//			console.log('trying to reauthenticate');
-			this.hoodie.account.authenticate()
-				.then(() => {
-//					console.log('re-authentication successful', this.hoodie.account.hasValidSession());
-					this.connected.next(true);
-				})
-				.fail(() => {
-//					console.log('re-authentication failed', this.hoodie);
-//					console.log('check connection', this.hoodie.checkConnection());
-//					console.log('is connected', this.hoodie.isConnected());
-//					console.log('remote', this.hoodie.remote());
-					this.connected.next(false);
-				});
-		}*/
+
+		this.connectionStatus = Observable.merge(
+			Observable.fromEvent(this.hoodie.connectionStatus, 'disconnect').mapTo(false), 
+			Observable.fromEvent(this.hoodie.connectionStatus, 'reconnect').mapTo(true),
+			Observable.of(this.hoodie.connectionStatus.ok)
+		);
+		this.connectionStatus.subscribe((status) => console.log('connection status', status));
+		this.hoodie.connectionStatus.startChecking({interval: 10000});
+
+		setTimeout(() => this.hoodie.account.signIn({username: 'manu', password: 'waf'}), 2000);
+		setTimeout(() => this.hoodie.account.signOut().then(() => console.log('disconnected')), 5000);
 	}
 
 	getHoodie = () => {

@@ -344,7 +344,8 @@ export class SeedConfig {
       '@angular/platform-browser': `node_modules/@angular/platform-browser/bundles/platform-browser.umd.js`,
       '@angular/platform-browser-dynamic': `node_modules/@angular/platform-browser-dynamic/bundles/platform-browser-dynamic.umd.js`,
       '@angular/router': `node_modules/@angular/router/index.js`,
-      'rxjs/*': `node_modules/rxjs/*`,
+      '@hoodie/client' : 'node_modules/@hoodie/client/dist/hoodie.js',
+     'rxjs/*': `node_modules/rxjs/*`,
       'app/*': `/app/*`,
       '*': `node_modules/*`
     },
@@ -368,7 +369,8 @@ export class SeedConfig {
     defaultJSExtensions: true,
     packageConfigPaths: [
       join(this.PROJECT_ROOT, 'node_modules', '*', 'package.json'),
-      join(this.PROJECT_ROOT, 'node_modules', '@angular', '*', 'package.json')
+      join(this.PROJECT_ROOT, 'node_modules', '@angular', '*', 'package.json'),
+      join(this.PROJECT_ROOT, 'node_modules', '@hoodie', '*', 'package.json')
     ],
     paths: {
       [`${this.TMP_DIR}/*`]: `${this.TMP_DIR}/*`,
@@ -407,7 +409,7 @@ export class SeedConfig {
         main: 'index.js',
         defaultExtension: 'js'
       },
-      'rxjs': {
+     'rxjs': {
         defaultExtension: 'js'
       }
     }
