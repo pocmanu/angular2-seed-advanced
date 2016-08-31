@@ -61,3 +61,6 @@ gulpfile.js.map
 
 #VSCode Chrome Debugger Extension (launch.json configuration)
 ChromeDebugger-UserData
+
+# OS X trash files
+.DS_Store
