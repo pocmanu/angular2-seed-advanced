@@ -1,3 +1,10 @@
+// Feel free to extend this interface
+// depending on your app specific config.
+export interface EnvConfig {
+  API?: string;
+  ENV?: string;
+}
+
 interface IPlatforms {
   WEB: string;
   MOBILE_NATIVE: string;
@@ -40,6 +47,17 @@ export class Config {
 
   public static IS_DESKTOP(): boolean {
     return Config.PLATFORM_TARGET === Config.PLATFORMS.DESKTOP;
+  }
+
+  public static ENVIRONMENT(): EnvConfig {
+    if (Config.IS_MOBILE_NATIVE()) {
+      return {
+        API: 'your api endpoint',
+        ENV: 'nativescript'
+      };
+    } else {
+      return JSON.parse('<%= ENV_CONFIG %>');
+    }
   }
 
   public static IS_DEBUG_MODE(): boolean {
