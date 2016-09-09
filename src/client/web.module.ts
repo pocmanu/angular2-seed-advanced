@@ -15,6 +15,7 @@ import { CoreModule } from './app/frameworks/core/core.module';
 import { AnalyticsModule } from './app/frameworks/analytics/analytics.module';
 import { MultilingualModule } from './app/frameworks/i18n/multilingual.module';
 import { SampleModule } from './app/frameworks/sample/sample.module';
+import { HoodieModule } from './app/frameworks/hoodie/hoodie.module';
 
 // config
 import { Config, WindowService, ConsoleService } from './app/frameworks/core/index';
@@ -45,7 +46,8 @@ if ('<%= TARGET_DESKTOP %>' === 'true') {
     routerModule,
     AnalyticsModule,
     MultilingualModule,
-    SampleModule
+    SampleModule,
+    HoodieModule
   ],
   declarations: [
     AppComponent,

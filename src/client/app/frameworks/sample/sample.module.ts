@@ -3,9 +3,12 @@ import { NgModule, Optional, SkipSelf } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
+import { MdSidenavModule, MdSidenavLayout, MdSidenav } from '@angular2-material/sidenav';
 
 // libs
 import { StoreModule } from '@ngrx/store';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { StoreLogMonitorModule, useLogMonitor } from '@ngrx/store-log-monitor';
 
 // app
 import { ToolbarComponent } from './components/toolbar.component';
@@ -13,6 +16,7 @@ import { NavbarComponent } from './components/navbar.component';
 import { nameListReducer, NameListService } from './services/name-list.service';
 import { MultilingualModule } from '../i18n/multilingual.module';
 import { multilingualReducer, MultilingualStateI } from '../i18n/services/multilingual.service';
+import { hoodie } from '../hoodie/hoodie.reducer';
 
 // state
 export interface AppStoreI {
@@ -32,8 +36,18 @@ export interface AppStoreI {
     MultilingualModule,
     StoreModule.provideStore({
       i18n: multilingualReducer,
-      names: nameListReducer
-    })
+      names: nameListReducer,
+      hoodie: hoodie
+    }),
+    StoreDevtoolsModule.instrumentStore({
+      maxAge: 5/*,
+      monitor: useLogMonitor({
+        visible: true,
+        position: 'right'
+      })*/
+    }),
+    MdSidenavModule
+    //StoreLogMonitorModule
   ],
   declarations: [
     ToolbarComponent,

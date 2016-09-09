@@ -1,5 +1,5 @@
 :host {
-  background-color: #106cc8;
+  background-color: #c81070;
   color: rgba(255, 255, 255, 0.87);
   display: block;
   height: 48px;
@@ -16,16 +16,19 @@ h1 {
 }
 
 :host lang-switcher,
-:host more {
+:host .more {
+  position: absolute;
+}
+:host .connected {
   position: absolute;
 }
 
 :host lang-switcher {
   top: 13px;
-  right: 52px;
+  right: 62px;
 }
 
-:host more {
+:host .more {
   background: url("./assets/svg/more.svg");
   top: 12px;
   right: 10px;
@@ -35,6 +38,20 @@ h1 {
   opacity: 0.7;
 }
 
-:host more:hover {
+:host .more:hover {
   opacity: 1;
+}
+
+:host .connected {
+  background-image: url("./assets/svg/connected.svg");
+  background-size: contain;
+  width: 24px;
+  height: 24px;
+  top: 12px;
+  right: 30px;
+  cursor: pointer;
+}
+
+:host .disconnected {
+    filter: url("./assets/svg/gray.svg#grayscale");
 }
