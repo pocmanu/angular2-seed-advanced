@@ -1,4 +1,4 @@
-import { NgGridConfig, NgGridItemConfig } from 'angular2-grid';
+import { NgGridItemConfig } from 'angular2-grid';
 
 import { CalendarService, CalendarEvent } from '../../frameworks/app/index';
 

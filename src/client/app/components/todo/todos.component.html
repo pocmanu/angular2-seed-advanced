@@ -10,7 +10,7 @@
 		<button class="pure-button" (click)="undo()">Undo</button>
 		<button class="pure-button" (click)="redo()">Redo</button>
 		<filter-select (filterSelect)="updateFilter($event)"></filter-select>
-		<todo-list [todosModel]="todosModel$ | async" (removeTodo)="removeTodo($event)" (toggleTodo)="toggleTodo($event)">
+		<todo-list [todosModel]="todos$ | async" (removeTodo)="removeTodo($event)" (toggleTodo)="toggleTodo($event)">
 		</todo-list>
 	</div>
 </div>

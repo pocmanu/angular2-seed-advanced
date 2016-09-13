@@ -1,19 +1,19 @@
 import {Component, ChangeDetectionStrategy} from '@angular/core';
-import {TodoList} from "./todo-list.component";
-import {TodoInput} from "./todo-input.component";
-import {FilterSelect} from "./filter-select.component";
+import {TodoListComponent} from './todo-list.component';
+import {TodoInputComponent} from './todo-input.component';
+import {FilterSelectComponent} from './filter-select.component';
 import {Store} from '@ngrx/store';
-import {AppState, Todo, TodoModel} from "../../frameworks/app/services/todos/todo.model";
-import {Observable} from "rxjs/Observable";
-import {ADD_TODO, REMOVE_TODO, TOGGLE_TODO, } from "../../frameworks/app/services/todos/todos.actions";
-import {UNDO, REDO} from "../../frameworks/app/services/undoable/undoable.actions";
+import {AppState, Todo, TodoModel} from '../../frameworks/app/services/todos/todo.model';
+import {Observable} from 'rxjs/Observable';
+import {ADD_TODO, REMOVE_TODO, TOGGLE_TODO, } from '../../frameworks/app/services/todos/todos.actions';
+import {UNDO, REDO} from '../../frameworks/app/services/undoable/undoable.actions';
 import 'rxjs/add/observable/combineLatest';
 
 @Component({
-	selector: `todos`,
+	selector: `todos-cmp`,
 	templateUrl: `./app/components/todo/todos.component.html`,
 	styleUrls: [`./app/components/todo/todos.css`],
-    directives: [TodoList, TodoInput, FilterSelect],
+    directives: [TodoListComponent, TodoInputComponent, FilterSelectComponent],
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TodosComponent {
@@ -22,18 +22,19 @@ export class TodosComponent {
 
 	constructor(private _store: Store<AppState>) {
 		const todos$ = _store.select<Observable<Todo[]>>('todos');
+		todos$.subscribe(todos => console.log('todos', todos));
 		const visibilityFilter$ = _store.select('visibilityFilter');
 
 		this.todosModel$ = Observable
 			.combineLatest(
-			todos$,
+			Observable.of(todos$),
 			visibilityFilter$,
 			({present = []}, visibilityFilter: any) => {
 				return {
 					filteredTodos: present.filter(visibilityFilter),
 					totalTodos: present.length,
 					completedTodos: present.filter((todo: Todo) => todo.complete).length
-				}
+				};
 			}
 		);
 	}

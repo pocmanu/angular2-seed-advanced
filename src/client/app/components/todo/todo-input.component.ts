@@ -10,10 +10,10 @@ import {Component, Output, EventEmitter} from '@angular/core';
       <button class="pure-button pure-button-primary" (click)="add(todo)">Add Todo</button>
     `
 })
-export class TodoInput {
+export class TodoInputComponent {
     @Output() addTodo : EventEmitter<string> = new EventEmitter<string>();
 
-    add(todoInput: {value: string}){
+    add(todoInput: {value: string}) {
         this.addTodo.emit(todoInput.value);
         todoInput.value = '';
     }

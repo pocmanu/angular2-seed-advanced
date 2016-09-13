@@ -2,6 +2,7 @@
 export const ADD_TODO = 'ADD_TODO';
 export const REMOVE_TODO = 'REMOVE_TODO';
 export const TOGGLE_TODO = 'TOGGLE_TODO';
+export const INIT_TODO = 'INIT_TODO';
 
 //filter actions
 export const SHOW_ALL = 'SHOW_ALL';

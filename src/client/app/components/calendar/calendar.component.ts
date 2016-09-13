@@ -16,17 +16,17 @@ import * as _ from 'lodash';
 })
 export class CalendarComponent {
 
-  private _config: any = {
+  _config: any = {
     rowToMin: 5,
     calStartTime: new Date(1970, 1, 1, 8, 0, 0, 0)
   };
 
-  private _eventTableConfig: NgGridConfig = {
+  _eventTableConfig: NgGridConfig = {
     margins: [0, 0], min_cols: 1, max_cols: 5, max_rows: 102, min_height: 14,
     col_width: 130, row_height: 6, cascade: 'none'
   };
 
-  private _titles: Array<any> = [
+  _titles: Array<any> = [
     { title: 'Lundi', config: { row: -2, col: 1, sizex: 1, sizey: 3, draggable: false, resizable: false, fixed: true } },
     { title: 'Mardi', config: { row: -2, col: 2, sizex: 1, sizey: 3, draggable: false, resizable: false, fixed: true } },
     { title: 'Mercredi', config: { row: -2, col: 3, sizex: 1, sizey: 3, draggable: false, resizable: false, fixed: true } },
@@ -71,6 +71,6 @@ export class CalendarComponent {
   }
 
   stop(event: any) {
-    console.log(event)
+    console.log(event);
   }
 }

@@ -1,9 +1,9 @@
-import {ActionReducer, Action} from "@ngrx/store";
-import {Todo} from "./todo.model";
-import {SHOW_COMPLETED, SHOW_ACTIVE, SHOW_ALL} from "./todos.actions";
+import {ActionReducer, Action} from '@ngrx/store';
+import {Todo} from './todo.model';
+import {SHOW_COMPLETED, SHOW_ACTIVE, SHOW_ALL} from './todos.actions';
 
 export const visibilityFilter : ActionReducer<any> = (state : any = (t: Todo) => t, action : Action) => {
-    switch(action.type){
+    switch(action.type) {
         case SHOW_COMPLETED:
             return (todo: Todo) => todo.complete;
         
