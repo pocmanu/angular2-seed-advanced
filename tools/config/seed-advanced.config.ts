@@ -31,42 +31,14 @@ export class SeedAdvancedConfig extends SeedConfig {
     this.BOOTSTRAP_PROD_MODULE = `${this.BOOTSTRAP_DIR}${bootstrap}`;
     this.BOOTSTRAP_FACTORY_PROD_MODULE = `${this.BOOTSTRAP_DIR}${bootstrap}.prod`;
 
-<<<<<<< HEAD
-      // reset system config with new APP_BASE      
-      this.SYSTEM_CONFIG = {
-        defaultJSExtensions: true,
-        paths: {
-          [this.BOOTSTRAP_MODULE]: `${this.APP_BASE}${this.BOOTSTRAP_MODULE}`,
-          'rxjs/*': `${this.APP_BASE}rxjs/*`,
-          'app/*': `/app/*`,
-          '*': `${this.APP_BASE}node_modules/*`
-        }
-      };
-      
-      this.SYSTEM_CONFIG.paths['ng2-translate/*'] = `${this.APP_BASE}node_modules/ng2-translate/*`;
-      this.SYSTEM_CONFIG.paths['reflect-metadata'] = `${this.APP_BASE}node_modules/reflect-metadata/Reflect`;
-    } else {
-      this.SYSTEM_CONFIG['map'] = {
-        'angular2-grid': `${this.APP_BASE}node_modules/angular2-grid/dist/main`
-      };
-    }
-=======
     this.APP_TITLE = 'Angular 2 Seed Advanced';
     this.APP_BASE = ''; // paths must remain relative
->>>>>>> upstream/master
 
     /** Development **/
 
     // Fix up package configuration for libs and @ngrx
     this.SYSTEM_CONFIG['packageConfigPaths'] = [
       `${this.APP_BASE}node_modules/*/package.json`,
-<<<<<<< HEAD
-      `${this.APP_BASE}node_modules/@angular/*/package.json`,
-      `${this.APP_BASE}node_modules/@ngrx/*/package.json`,
-      `${this.APP_BASE}node_modules/@hoodie/*/package.json`
-    ]; 
-    this.SYSTEM_CONFIG['packages'] = systemJsPackages();
-=======
       `${this.APP_BASE}node_modules/@ngrx/*/package.json`
     ];
     if (!this.SYSTEM_CONFIG['packages']) this.SYSTEM_CONFIG['packages'] = {};
@@ -78,7 +50,6 @@ export class SeedAdvancedConfig extends SeedConfig {
       main: 'index.js',
       defaultExtension: 'js'
     };
->>>>>>> upstream/master
 
     // Fix up paths for libs
     this.SYSTEM_CONFIG.paths[this.BOOTSTRAP_MODULE] = `${this.APP_BASE}${this.BOOTSTRAP_MODULE}`;
