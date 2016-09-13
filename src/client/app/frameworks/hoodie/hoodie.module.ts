@@ -14,7 +14,8 @@ import { HoodieService } from './hoodie.service';
 
 @NgModule({
   imports: [
-    CommonModule
+    CommonModule,
+    StoreModule
   ],
   declarations: [
   ],

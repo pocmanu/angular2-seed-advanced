@@ -3,12 +3,9 @@ import { NgModule, Optional, SkipSelf } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
-import { MdSidenavModule, MdSidenavLayout, MdSidenav } from '@angular2-material/sidenav';
 
 // libs
 import { StoreModule } from '@ngrx/store';
-import { StoreDevtoolsModule } from '@ngrx/store-devtools';
-import { StoreLogMonitorModule, useLogMonitor } from '@ngrx/store-log-monitor';
 
 // app
 import { ToolbarComponent } from './components/toolbar.component';
@@ -39,14 +36,13 @@ export interface AppStoreI {
       names: nameListReducer,
       hoodie: hoodie
     }),
-    StoreDevtoolsModule.instrumentStore({
-      maxAge: 5/*,
+    /*StoreDevtoolsModule.instrumentStore({
+      maxAge: 5,
       monitor: useLogMonitor({
         visible: true,
         position: 'right'
-      })*/
-    }),
-    MdSidenavModule
+      })
+    }),*/
     //StoreLogMonitorModule
   ],
   declarations: [
