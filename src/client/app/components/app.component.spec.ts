@@ -11,6 +11,11 @@ import {MultilingualModule} from '../frameworks/i18n/multilingual.module';
 import {AppComponent} from './app.component';
 import {HomeComponent} from './home/home.component';
 import {AboutComponent} from './about/about.component';
+import {HoodieService} from '../frameworks/hoodie/hoodie.service';
+
+class MockHoodieService {
+
+}
 
 const config:Route[] = [
   {path: '', component: HomeComponent},
@@ -29,7 +34,8 @@ const testModuleConfig = () => {
     providers: [
       TEST_CORE_PROVIDERS(),
       TEST_HTTP_PROVIDERS(),
-      NameListService
+      NameListService,
+      {provide:HoodieService, useClass: MockHoodieService}
     ]
   });
 };
