@@ -1,0 +1,8 @@
+    <div *ngIf="!isAnswered" class="btn btn-default">
+        ........
+    </div>
+    <div *ngIf="isAnswered" class="btn"
+        [ngClass]="{'btn-default': !isValidated, 'btn-success':  isValidated &&  isValid, 'btn-danger' :  isValidated && !isValid}" 
+        dnd-draggable [dragEnabled]="true" [dragData]="answer">
+        {{answer}}
+    </div>

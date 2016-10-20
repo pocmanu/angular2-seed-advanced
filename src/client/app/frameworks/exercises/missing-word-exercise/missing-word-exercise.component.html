@@ -1,0 +1,32 @@
+<div class="container">
+	<div class="row">
+		<div *ngFor="let sentence_num of sentences_nums" class="col-md-10 h6">
+			<span *ngFor="let word of getWords(sentence_num); let i = index">
+				<sd-missing-word *ngIf="isMissingWord(sentence_num, i) 
+						"dnd-droppable (onDropSuccess)="transferDataSuccess($event, sentence_num, i)"
+						[isAnswered]="isAnswered(sentence_num, i)"
+						[isValidated]="validated"
+						[isValid]="isValid(sentence_num, i)"
+						[answer]="getAnswerAt(sentence_num, i)">
+                    {{word}}
+				</sd-missing-word>
+			<div *ngIf="!isMissingWord(sentence_num, i)" class="btn btn-default" style="border: none; padding: 6px 3px">
+				{{word}}
+			</div>
+			</span>
+		</div>
+		<div class="col-md-2">
+			<button class="btn btn-default" [disabled]="missing_words.length > 0" (click)="onValidate($event)">Valider</button>
+		</div>
+	</div>
+	<div class="row">
+		<div class="panel panel-success">
+			<div class="panel-heading">
+				Réponses possibles
+			</div>
+			<div *ngFor="let word of missing_words" class="btn btn-default" dnd-draggable [dragEnabled]="true" [dragData]=word>
+				{{word}}
+			</div>
+		</div>
+	</div>
+</div>

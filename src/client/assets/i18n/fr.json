@@ -8,7 +8,5 @@
   "INPUT_HINT": "Ajouter un nouvel informaticien...",
   "ADD_BTN_TEXT": "Ajouter",
   "SUCCESS_MSG": "Votre déploiement d'Angular 2 Advanced Seed a parfaitement fonctionné.",
-  "CALENDAR": "Calendrier",
-  "TODOS": "Todos",
-  "COUNTER": "Compteur"
+  "EXERCISES": "Exercices"
 }

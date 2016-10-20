@@ -1,0 +1,9 @@
+<sd-missing-word-exercise 
+    [sentences_nums]="sentences_nums | async" 
+    [sentences]="sentences | async" 
+    [missing_words]="missing_words | async" 
+    [answers]="answers | async" 
+    [validated]="validated | async"
+    (answer)="onAnswer($event)" 
+    (validate)="onValidate($event)">
+</sd-missing-word-exercise>

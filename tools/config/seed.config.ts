@@ -308,6 +308,8 @@ export class SeedConfig {
    */
   APP_ASSETS: InjectableDependency[] = [
     { src: `${this.CSS_SRC}/main.${this.getInjectableStyleExtension()}`, inject: true, vendor: false },
+    { src: `${this.CSS_SRC}/bootstrap.min.${this.getInjectableStyleExtension()}`, inject: true, vendor: false },
+    { src: `/node_modules/ng2-dnd/style.${this.getInjectableStyleExtension()}`, inject: true, vendor: false },
   ];
 
   /**
@@ -360,7 +362,9 @@ export class SeedConfig {
         'node_modules/@angular/platform-browser-dynamic/bundles/platform-browser-dynamic-testing.umd.js',
       '@angular/router/testing': 'node_modules/@angular/router/bundles/router-testing.umd.js',
 
-      '@hoodie/client' : 'node_modules/@hoodie/client/dist/hoodie.js',
+      '@hoodie/client': 'node_modules/@hoodie/client/dist/hoodie.js',
+      'angular2-grid': 'node_modules/angular2-grid/dist/main.js', 
+      'ng2-dnd': 'node_modules/ng2-dnd/index.js',
       'rxjs/*': 'node_modules/rxjs/*',
       'app/*': '/app/*',
       // For test config
@@ -433,7 +437,9 @@ export class SeedConfig {
       },
      'rxjs': {
         defaultExtension: 'js'
-      }
+      },
+      'ng2-dnd':  { main: 'index.js',  defaultExtension: 'js' },
+      'angular2-grid':  { main: 'main.js',  defaultExtension: 'js' }
     }
   };
 

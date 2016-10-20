@@ -8,7 +8,5 @@
   "INPUT_HINT": "Enter a new computer scientist...",
   "ADD_BTN_TEXT": "Add",
   "SUCCESS_MSG": "Your deployment of Angular 2 Advanced Seed worked perfectly.",
-  "CALENDAR": "Calendar",
-  "TODOS": "Todos",
-  "COUNTER": "Counter"
+  "EXERCISES": "Exercises"
 }

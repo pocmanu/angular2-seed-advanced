@@ -14,6 +14,7 @@ import { nameListReducer, NameListService } from './services/name-list.service';
 import { MultilingualModule } from '../i18n/multilingual.module';
 import { multilingualReducer, MultilingualStateI } from '../i18n/services/multilingual.service';
 import { hoodie } from '../hoodie/hoodie.reducer';
+import { exercisesReducer } from '../exercises/index';
 
 // state
 export interface AppStoreI {
@@ -34,7 +35,8 @@ export interface AppStoreI {
     StoreModule.provideStore({
       i18n: multilingualReducer,
       names: nameListReducer,
-      hoodie: hoodie
+      hoodie: hoodie,
+      exercises: exercisesReducer
     }),
     /*StoreDevtoolsModule.instrumentStore({
       maxAge: 5,
