@@ -3,6 +3,12 @@ import { NgModule } from '@angular/core';
 import { APP_BASE_HREF } from '@angular/common';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
+import { Http } from '@angular/http';
+
+// libs
+import { StoreModule } from '@ngrx/store';
+import { EffectsModule } from '@ngrx/effects';
+import { TranslateLoader } from 'ng2-translate/ng2-translate';
 
 // app
 import { AppComponent } from './app/components/app.component';
@@ -13,15 +19,22 @@ import { routes } from './app/components/app.routes';
 // feature modules
 import { CoreModule } from './app/frameworks/core/core.module';
 import { AnalyticsModule } from './app/frameworks/analytics/analytics.module';
-import { MultilingualModule } from './app/frameworks/i18n/multilingual.module';
+import { multilingualReducer, MultilingualEffects } from './app/frameworks/i18n/index';
+import { MultilingualModule, translateFactory } from './app/frameworks/i18n/multilingual.module';
 import { SampleModule } from './app/frameworks/sample/sample.module';
+import { nameListReducer, NameListEffects } from './app/frameworks/sample/index';
 import { HoodieModule } from './app/frameworks/hoodie/hoodie.module';
+import { hoodie } from './app/frameworks/hoodie/hoodie.reducer';
 import { ExercisesModule } from './app/frameworks/exercises/exercises.module';
+import { exercisesReducer } from './app/frameworks/exercises/index';
 
 // config
 import { Config, WindowService, ConsoleService } from './app/frameworks/core/index';
 Config.PLATFORM_TARGET = Config.PLATFORMS.WEB;
-Config.DEBUG.LEVEL_4 = true;
+if (String('<%= ENV %>') === 'dev') {
+  // only output console logging in dev mode
+  Config.DEBUG.LEVEL_4 = true;
+}
 
 // sample config (extra)
 import { AppConfig } from './app/frameworks/sample/services/app-config';
@@ -37,19 +50,41 @@ if (String('<%= TARGET_DESKTOP %>') === 'true') {
   routerModule = RouterModule.forRoot(routes, {useHash: true});
 }
 
+declare var window, console;
+
+// For AoT compilation to work:
+export function win() {
+  return window;
+}
+export function cons() {
+  return console;
+}
+
 @NgModule({
   imports: [
     BrowserModule,
     CoreModule.forRoot([
-      { provide: WindowService, useValue: window },
-      { provide: ConsoleService, useValue: console }
+      { provide: WindowService, useFactory: (win) },
+      { provide: ConsoleService, useFactory: (cons) }
     ]),
     routerModule,
     AnalyticsModule,
-    MultilingualModule,
+    MultilingualModule.forRoot([{
+      provide: TranslateLoader,
+      deps: [Http],
+      useFactory: (translateFactory)
+    }]),
     SampleModule,
+    StoreModule.provideStore({
+      i18n: multilingualReducer,
+      names: nameListReducer,
+      hoodie: hoodie,
+      exercises: exercisesReducer
+    }),
     HoodieModule,
-    ExercisesModule
+    ExercisesModule,
+    EffectsModule.run(MultilingualEffects),
+    EffectsModule.run(NameListEffects)
   ],
   declarations: [
     AppComponent,

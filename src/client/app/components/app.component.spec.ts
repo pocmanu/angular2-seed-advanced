@@ -1,17 +1,18 @@
-import {TestBed} from '@angular/core/testing';
-import {Component} from '@angular/core';
-import {FormsModule} from '@angular/forms';
-import {Route} from '@angular/router';
-import {RouterTestingModule} from '@angular/router/testing';
+import { TestBed } from '@angular/core/testing';
+import { Component } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { Route } from '@angular/router';
+import { RouterTestingModule } from '@angular/router/testing';
+import { StoreModule } from '@ngrx/store';
 
-import {t} from '../frameworks/test/index';
-import {TEST_CORE_PROVIDERS, TEST_HTTP_PROVIDERS} from '../frameworks/core/testing/index';
-import {NameListService, NavbarComponent, ToolbarComponent} from '../frameworks/sample/index';
-import {MultilingualModule} from '../frameworks/i18n/multilingual.module';
-import {AppComponent} from './app.component';
-import {HomeComponent} from './home/home.component';
-import {AboutComponent} from './about/about.component';
-import {HoodieService} from '../frameworks/hoodie/hoodie.service';
+import { t } from '../frameworks/test/index';
+import { TEST_CORE_PROVIDERS, TEST_HTTP_PROVIDERS } from '../frameworks/core/testing/index';
+import { NameListService, NavbarComponent, ToolbarComponent } from '../frameworks/sample/index';
+import { MultilingualModule } from '../frameworks/i18n/multilingual.module';
+import { AppComponent } from './app.component';
+import { HomeComponent } from './home/home.component';
+import { AboutComponent } from './about/about.component';
+import { HoodieService } from '../frameworks/hoodie/hoodie.service';
 
 class MockHoodieService {
 
@@ -25,7 +26,12 @@ const config:Route[] = [
 // test module configuration for each test
 const testModuleConfig = () => {
   TestBed.configureTestingModule({
-    imports: [FormsModule, MultilingualModule, RouterTestingModule.withRoutes(config)],
+    imports: [
+      FormsModule,
+      MultilingualModule,
+      StoreModule.provideStore({}),
+      RouterTestingModule.withRoutes(config)
+    ],
     declarations: [
       TestComponent, AppComponent,
       HomeComponent, AboutComponent,
