@@ -11,13 +11,13 @@ import { NgGridModule } from 'angular2-grid';
 // current module
 import { ExercisesComponent } from './exercises.component';
 import { MissingWordExerciseComponent } from './missing-word-exercise/missing-word-exercise.component';
-import { MissingWordPageComponent } from './missing-word-exercise/missing-word-page.component';
+import { MissingWordContainerComponent } from './missing-word-exercise/missing-word-container.component';
 import { MissingWordComponent } from './missing-word-exercise/missing-word.component';
 
 @NgModule({
     imports: [StoreModule, CommonModule, FormsModule, DndModule.forRoot(), NgGridModule],
     exports: [ExercisesComponent],
-    declarations: [ExercisesComponent, MissingWordPageComponent, MissingWordExerciseComponent, MissingWordComponent],
+    declarations: [ExercisesComponent, MissingWordContainerComponent, MissingWordExerciseComponent, MissingWordComponent],
     providers: [],
 })
 export class ExercisesModule { }

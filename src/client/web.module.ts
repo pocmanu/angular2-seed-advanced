@@ -6,8 +6,10 @@ import { RouterModule } from '@angular/router';
 import { Http } from '@angular/http';
 
 // libs
-import { StoreModule } from '@ngrx/store';
+import { StoreModule, ActionReducer, combineReducers } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
+import { compose } from '@ngrx/core/compose';
+import { storeFreeze } from 'ngrx-store-freeze';
 import { TranslateLoader } from 'ng2-translate/ng2-translate';
 
 // app
@@ -47,7 +49,7 @@ let routerModule = RouterModule.forRoot(routes);
 if (String('<%= TARGET_DESKTOP %>') === 'true') {
   Config.PLATFORM_TARGET = Config.PLATFORMS.DESKTOP;
   // desktop (electron) must use hash
-  routerModule = RouterModule.forRoot(routes, {useHash: true});
+  routerModule = RouterModule.forRoot(routes, { useHash: true });
 }
 
 declare var window, console;
@@ -58,6 +60,24 @@ export function win() {
 }
 export function cons() {
   return console;
+}
+
+const reducers = {
+  i18n: multilingualReducer,
+  names: nameListReducer,
+  hoodie: hoodie,
+  exercises: exercisesReducer
+};
+
+const developmentReducer: ActionReducer<any> = compose(storeFreeze, combineReducers)(reducers);
+const productionReducer: ActionReducer<any> = combineReducers(reducers);
+
+export function reducer(state: any, action: any) {
+  if (String('<%= ENV %>') === 'prod') {
+    return productionReducer(state, action);
+  } else {
+    return developmentReducer(state, action);
+  }
 }
 
 @NgModule({
@@ -75,12 +95,7 @@ export function cons() {
       useFactory: (translateFactory)
     }]),
     SampleModule,
-    StoreModule.provideStore({
-      i18n: multilingualReducer,
-      names: nameListReducer,
-      hoodie: hoodie,
-      exercises: exercisesReducer
-    }),
+    StoreModule.provideStore(reducer),
     HoodieModule,
     ExercisesModule,
     EffectsModule.run(MultilingualEffects),

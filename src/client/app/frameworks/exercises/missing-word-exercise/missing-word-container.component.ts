@@ -1,5 +1,4 @@
 // angular
-import { Input, OnInit } from '@angular/core';
 
 // libs
 import * as _ from 'lodash';
@@ -10,7 +9,7 @@ import 'rxjs/add/operator/map';
 // app
 import { BaseComponent } from '../../core/index';
 import { MissingWordSentence, MissingWordAnswer } from './missing-word-exercise.model';
-import { ADD_ANSWER, VALIDATE } from './missing-word-exercise.actions';
+import { AddAnswerAction, ValidateAction } from './missing-word-exercise.actions';
 import * as fromRoot from '../index';
 
 
@@ -19,7 +18,7 @@ import * as fromRoot from '../index';
     selector: 'sd-missing-word-page',
     templateUrl: 'missing-word-page.component.html'
 })
-export class MissingWordPageComponent {
+export class MissingWordContainerComponent {
 
     sentences_nums: Observable<String[]>;
     sentences: Observable<{ [sentences_num: string]: MissingWordSentence }>;
@@ -36,10 +35,10 @@ export class MissingWordPageComponent {
     }
 
     onAnswer(answer: MissingWordAnswer) {
-        this.store.dispatch({ type: ADD_ANSWER, payload: answer });
+        this.store.dispatch(new AddAnswerAction(answer));
     }
 
     onValidate($event: any) {
-        this.store.dispatch({ type: VALIDATE });
+        this.store.dispatch(new ValidateAction());
     }
 }

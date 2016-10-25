@@ -95,5 +95,7 @@ export class SeedAdvancedConfig extends SeedConfig {
     this.SYSTEM_BUILDER_CONFIG.paths['@ngrx/store'] = `node_modules/@ngrx/store/index.js`;
     this.SYSTEM_BUILDER_CONFIG.paths['@ngrx/effects'] = `node_modules/@ngrx/effects/index.js`;
     this.SYSTEM_BUILDER_CONFIG.paths['angular2-grid'] = `node_modules/angular2-grid/dist/main.js`;
+    this.SYSTEM_BUILDER_CONFIG.paths['ngrx-store-freeze'] = `node_modules/ngrx-store-freeze/dist/index.js`;
+    this.SYSTEM_BUILDER_CONFIG.paths['deep-freeze'] = `node_modules/deep-freeze/index.js`;
   }
 }

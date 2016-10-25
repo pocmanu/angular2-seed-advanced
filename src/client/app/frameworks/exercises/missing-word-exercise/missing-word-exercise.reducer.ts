@@ -6,7 +6,7 @@ import { combineLatest } from 'rxjs/observable/combineLatest';
 import * as _ from 'lodash';
 
 import { MissingWordSentence, MissingWordAnswer } from './missing-word-exercise.model';
-import { ADD_ANSWER, VALIDATE } from './missing-word-exercise.actions';
+import { Actions, ActionTypes } from './missing-word-exercise.actions';
 
 export interface MissingWordState {
     sentences_nums: String[];
@@ -32,17 +32,17 @@ const initialState: MissingWordState = {
     validated: false
 };
 
-export const missing_word_exercise_red: ActionReducer<any> = (state = initialState, action: Action) => {
+export const missing_word_exercise_red: ActionReducer<any> = (state = initialState, action: Actions) => {
 
     switch (action.type) {
-        case ADD_ANSWER:
+        case ActionTypes.ADD_ANSWER:
             let answer: { sentence_num: number, word_position: number, word: string } = action.payload;
             let sentence_answers = state.answers[answer.sentence_num];
             let new_sentence_answers = Object.assign({}, sentence_answers, { [answer.word_position]: { word: answer.word } });
             let new_answers = Object.assign({}, state.answers, { [answer.sentence_num]: new_sentence_answers });
             return Object.assign({}, state, { answers: new_answers });
 
-        case VALIDATE:
+        case ActionTypes.VALIDATE:
             let validated_answers = _.transform(state.answers,
                 (sentence_answers, sentence_answer, sentence_num) => sentence_answers[sentence_num] = _.transform(sentence_answer,
                     (word_answers, word_answer, word_index) => word_answers[word_index] = {
@@ -51,7 +51,6 @@ export const missing_word_exercise_red: ActionReducer<any> = (state = initialSta
                     }
                 )
             );
-            console.log(validated_answers)
             return Object.assign({}, state, { answers: validated_answers, validated: true });
         default:
             return state;

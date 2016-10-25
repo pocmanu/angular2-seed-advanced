@@ -2,6 +2,7 @@
 // generally static helpers (non-injectables)
 export * from './utils/config';
 export * from './utils/view-broker';
+export * from './utils/action.utils';
 
 // decorators
 export * from './decorators/base.component';

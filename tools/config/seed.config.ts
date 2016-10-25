@@ -402,6 +402,8 @@ export class SeedConfig {
       'node_modules/@angular/platform-browser-dynamic/bundles/platform-browser-dynamic-testing.umd.js',
       '@angular/router/testing': 'node_modules/@angular/router/bundles/router-testing.umd.js',
 
+      'ngrx-store-freeze': 'node_modules/ngrx-store-freeze/dist/index.js', 
+      'deep-freeze': 'node_modules/deep-freeze/index.js', 
       '@hoodie/client': 'node_modules/@hoodie/client/dist/hoodie.js',
       'angular2-grid': 'node_modules/angular2-grid/dist/main.js', 
       'ng2-dnd': 'node_modules/ng2-dnd/index.js',
@@ -431,7 +433,8 @@ export class SeedConfig {
     packageConfigPaths: [
       join('node_modules', '*', 'package.json'),
       join('node_modules', '@angular', '*', 'package.json'),
-      join('node_modules', '@hoodie', '*', 'package.json')
+      join('node_modules', '@hoodie', '*', 'package.json'),
+      join('node_modules', 'ngrx-store-freeze', '*', 'package.json')
     ],
     paths: {
       [join(this.TMP_DIR, '*')]: `${this.TMP_DIR}/*`,
@@ -480,7 +483,9 @@ export class SeedConfig {
         defaultExtension: 'js'
       },
       'ng2-dnd':  { main: 'index.js',  defaultExtension: 'js' },
-      'angular2-grid':  { main: 'main.js',  defaultExtension: 'js' }
+      'angular2-grid':  { main: 'main.js',  defaultExtension: 'js' },
+      'ngrx-store-freese':  { main: 'index.js',  defaultExtension: 'js' },
+      'deep-freese':  { main: 'index.js',  defaultExtension: 'js' }
     }
   }, join(this.PROJECT_ROOT, this.APP_SRC), this.TMP_DIR);
 
