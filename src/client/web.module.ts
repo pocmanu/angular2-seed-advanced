@@ -10,7 +10,7 @@ import { StoreModule, ActionReducer, combineReducers } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { compose } from '@ngrx/core/compose';
 import { storeFreeze } from 'ngrx-store-freeze';
-import { TranslateLoader } from 'ng2-translate/ng2-translate';
+import { TranslateLoader } from 'ng2-translate';
 
 // app
 import { AppComponent } from './app/components/app.component';
@@ -33,7 +33,7 @@ import { exercisesReducer } from './app/frameworks/exercises/index';
 // config
 import { Config, WindowService, ConsoleService } from './app/frameworks/core/index';
 Config.PLATFORM_TARGET = Config.PLATFORMS.WEB;
-if (String('<%= ENV %>') === 'dev') {
+if (String('<%= BUILD_TYPE %>') === 'dev') {
   // only output console logging in dev mode
   Config.DEBUG.LEVEL_4 = true;
 }

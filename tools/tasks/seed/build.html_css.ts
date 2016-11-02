@@ -21,7 +21,7 @@ const processors = [
 
 const reportPostCssError = (e: any) => util.log(util.colors.red(e.message));
 
-const isProd = Config.ENV === 'prod';
+const isProd = Config.BUILD_TYPE === 'prod';
 
 if (isProd) {
   processors.push(
@@ -47,7 +47,12 @@ function prepareTemplates() {
  * Execute the appropriate component-stylesheet processing method based on user stylesheet preference.
  */
 function processComponentStylesheets() {
-  return Config.ENABLE_SCSS ? processComponentScss() : processComponentCss();
+  return Config.ENABLE_SCSS ?
+    merge(
+      processComponentScss(),
+      processComponentCss())
+    :
+    processComponentCss();
 }
 
 /**
@@ -61,7 +66,12 @@ function processComponentScss() {
     .pipe(plugins.sass(Config.getPluginConfig('gulp-sass')).on('error', plugins.sass.logError))
     .pipe(plugins.postcss(processors))
     .on('error', reportPostCssError)
-    .pipe(plugins.sourcemaps.write(isProd ? '.' : ''));
+    .pipe(plugins.sourcemaps.write(isProd ? '.' : '', {
+      sourceMappingURL: (file: any) => {
+        // write absolute urls to the map files
+        return `${Config.APP_BASE}${file.relative}.map`;
+      }
+    }));
 
   if (!isProd) {
     stream = stream.pipe(newer({
