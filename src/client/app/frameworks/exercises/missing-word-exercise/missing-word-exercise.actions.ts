@@ -11,7 +11,7 @@ export const ActionTypes = {
 export class AddAnswerAction implements Action {
     type = ActionTypes.ADD_ANSWER;
 
-    constructor(public payload: MissingWordAnswer) { };
+    constructor(public payload: { sentence_num: number, word_position: number, word: string }) { };
 }
 
 export class ValidateAction implements Action {
