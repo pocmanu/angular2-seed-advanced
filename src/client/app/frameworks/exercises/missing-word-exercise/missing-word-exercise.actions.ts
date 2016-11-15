@@ -1,11 +1,9 @@
 import { Action } from '@ngrx/store';
 import { type } from '../../core/index';
-
-import { MissingWordAnswer } from './missing-word-exercise.model';
-
+ 
 export const ActionTypes = {
     ADD_ANSWER: type('[Missing word exercise] Add answer'),
-    VALIDATE: type('[Missing word exercise] Validate'),
+    VALIDATE:   type('[Missing word exercise] Validate'),
 };
 
 export class AddAnswerAction implements Action {
