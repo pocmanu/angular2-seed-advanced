@@ -176,7 +176,7 @@
     "core-js": "^2.4.1",
     "intl": "^1.2.5",
     "es-module-loader": "^1.0.0",
-    "hoodie": "^24.0.0",
+    "hoodie": "^24.3.4",
     "lodash": "^4.16.4",
     "ng2-dnd": "^2.0.0",
     "ng2-translate": "^3.1.3",
